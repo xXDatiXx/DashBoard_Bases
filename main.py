@@ -74,9 +74,15 @@ class MainScreen(QMainWindow):
         self.alta_pushbutton_3.clicked.connect(self.agregarEmpleado) 
         #Boton paea borrar una orden
         self.terminado_pushbutton.clicked.connect(self.borrarOrden)
+        #Boton para ir a ventana dashboard
+        self.dashboard_pushbutton.clicked.connect(self.gotoDashboard)
 
 
     #FUNCIONES
+    def gotoDashboard(self):
+        dashboard = DashboardScreen()
+        widget.addWidget(dashboard)
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
     def borrarOrden(self):
         idOrden = self.borrar_lineedit.text()
@@ -276,7 +282,12 @@ class MainScreen(QMainWindow):
     def modificarTimer_update(self):
         self.refreshTables()
 
-#Clase para preparar la base de Datos
+class DashboardScreen(QMainWindow):
+    def __init__(self):
+        super(MainScreen, self).__init__()
+        loadUi("dashboard.ui", self)
+
+#Funcion para preparar la base de Datos
 def prepareDatabase():
     db = QSqlDatabase.addDatabase("QSQLITE")
     db.setDatabaseName("cleanwalkers.db")
