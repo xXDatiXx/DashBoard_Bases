@@ -323,16 +323,16 @@ def prepareDatabase():
             if(q.exec()):
                 print("Tabla empleado creada")
     #Agregar datos de prueba de clientesCW.csv
-    # with open('clientesCW.csv', errors="ignore") as File:
-    #     reader = csv.reader(File)
-    #     for row in reader:
-    #         con = sql.connect("cleanwalkers.db")
-    #         cursor = con.cursor()
-    #         if cursor.fetchone() == None:
-    #             instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimineto, TotalVisitas, TotalServicios) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}')")
-    #             con.execute(instruccion)
-    #             con.commit()
-    #             con.close()
+    with open('clientesCW.csv', errors="ignore") as File:
+        reader = csv.reader(File)
+        for row in reader:
+            con = sql.connect("cleanwalkers.db")
+            cursor = con.cursor()
+            if cursor.fetchone() == None:
+                instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimineto, TotalVisitas, TotalServicios) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}')")
+                con.execute(instruccion)
+                con.commit()
+                con.close()
   
 def verificarServicios():
     con = sql.connect("cleanwalkers.db")
