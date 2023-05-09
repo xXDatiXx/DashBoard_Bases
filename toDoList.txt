@@ -4,6 +4,7 @@
 
 -Lectura el csv de cleanWalkers
 -Insertar datos a la base de datos
+-Separar por docuemntos el código
 
 Ideas de consultas
 -ventas según el mes
