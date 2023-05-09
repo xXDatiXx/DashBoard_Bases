@@ -297,7 +297,6 @@ QPushButton#alta_pushbutton:hover{
        <string>Diciembre</string>
       </property>
      </widget>
-<<<<<<< HEAD
      <widget class="QPushButton" name="noviembre_pushButton">
       <property name="geometry">
        <rect>
@@ -334,28 +333,18 @@ QPushButton#alta_pushbutton:hover{
       <property name="geometry">
        <rect>
         <x>30</x>
-=======
-     <widget class="QPushButton" name="TodoTiempo">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
->>>>>>> 0142f6c3ddae1418ab97a34bf62951ff3f0e9300
         <y>380</y>
         <width>56</width>
         <height>17</height>
        </rect>
       </property>
-<<<<<<< HEAD
       <property name="cursor">
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
-=======
->>>>>>> 0142f6c3ddae1418ab97a34bf62951ff3f0e9300
       <property name="text">
        <string>Todo el tiempo</string>
       </property>
      </widget>
-<<<<<<< HEAD
      <widget class="QPushButton" name="abril_pushButton">
       <property name="geometry">
        <rect>
@@ -414,23 +403,6 @@ QPushButton#alta_pushbutton:hover{
        </rect>
       </property>
      </widget>
-=======
-     <widget class="QGraphicsView" name="graphicsView">
-      <property name="geometry">
-       <rect>
-        <x>260</x>
-        <y>110</y>
-        <width>256</width>
-        <height>192</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_5">
-     <attribute name="title">
-      <string>Clientes</string>
-     </attribute>
->>>>>>> 0142f6c3ddae1418ab97a34bf62951ff3f0e9300
     </widget>
     <widget class="QWidget" name="tab">
      <attribute name="title">
