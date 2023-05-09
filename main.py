@@ -6,6 +6,8 @@ from PyQt6.QtSql import *
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *
 import sqlite3 as sql
+import seaborn as sns
+import csv
 import datetime
 
 
@@ -202,14 +204,16 @@ class MainScreen(QMainWindow):
 
     def agregarCliente(self):
         nombreCliente = self.nombre_cliente_lineedit.text()
-        cumpleanos = self.cumpleanos_lineedit.text()
+        apellidoCliente = self.apellido_cliente_lineedit.text()
         correo = self.correo_lineedit.text()
         celular = self.celular_lineedit.text()
+        sexo = self.sexo_lineedit.text()
+        cumpleanos = self.cumpleanos_lineedit.text()
         fechaRegistro = datetime.date.today()
         con = sql.connect("cleanwalkers.db")
         cursor = con.cursor()
         
-        if len(nombreCliente) == 0 or len(celular) == 0 or len(correo) == 0 or len(cumpleanos) == 0:
+        if len(nombreCliente) == 0 or len(celular) == 0 or len(correo) == 0 or len(cumpleanos) == 0 or len(sexo) == 0 or len(apellidoCliente) == 0:
             self.aviso_lineedit_2.setText("")
             self.aviso_lineedit_2.setText("Por favor llena todos los campos.")
         else:
@@ -286,6 +290,16 @@ class DashboardScreen(QMainWindow):
     def __init__(self):
         super(DashboardScreen, self).__init__()
         loadUi("dashboard.ui", self)
+        self.regresarButton.clicked.connect(self.gotoMain)
+        #Agregar imagen de fondo al graphicview
+        #self.graphicsView.setStyleSheet("background-image: url(logo.png);")
+
+
+    #Funciones
+    def gotoMain(self):
+        main = MainScreen()
+        widget.addWidget(main)
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
 #Funcion para preparar la base de Datos
 def prepareDatabase():
@@ -299,7 +313,7 @@ def prepareDatabase():
         if(q.prepare("CREATE TABLE IF NOT EXISTS servicio (NombreServicio varchar(50) primary key not null, Costo float, PromedioEntrega varchar(50))")):
             if(q.exec()):
                 print("Tabla servicio creada")
-        if(q.prepare("CREATE TABLE IF NOT EXISTS cliente (idCliente INTEGER PRIMARY KEY AUTOINCREMENT, NombreCliente type UNIQUE, Cumpleanos date, Telefono integer, Correo varchar(50), FechaRegistro date)")):
+        if(q.prepare("CREATE TABLE IF NOT EXISTS cliente (idCliente INTEGER PRIMARY KEY AUTOINCREMENT, NombreCliente varchar(50), ApellidoCliente varchar(50), Correo varchar(50), Telefono integer, Sexo varchar(50), FechaNacimineto date, TotalVisitas integer, TotalServicios integer, FechaRegistro date)")):
             if(q.exec()):
                 print("Tabla cliente creada")
         if(q.prepare("CREATE TABLE IF NOT EXISTS orden (idOrden INTEGER PRIMARY KEY AUTOINCREMENT, idCliente varchar(50), idTenis integer, FechaLlegada date, Costo float, FOREIGN KEY (idCliente) REFERENCES cliente(idCliente), FOREIGN KEY (idTenis) REFERENCES calzado(idTenis))")):
@@ -308,6 +322,15 @@ def prepareDatabase():
         if(q.prepare("CREATE TABLE IF NOT EXISTS empleado (idEmpleado INTEGER PRIMARY KEY AUTOINCREMENT, NombreEmpleado varchar(50), ApellidoEmpleado varchar(50), Telefono integer, Correo varchar(50), FechaRegistro date)")):
             if(q.exec()):
                 print("Tabla empleado creada")
+    #Agregar datos de prueba de clientesCW.csv
+    with open('clientesCW.csv', newline='') as File:
+        reader = csv.reader(File)
+        con = sql.connect("cleanwalkers.db")
+        for row in reader:
+            if row[0] != "Nombre":
+                instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimineto, TotalVisitas, TotalServicios, FechaRegistro) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', 0, 0, '{row[6]}')")
+                con.execute(instruccion)
+        con.commit()
   
 def verificarServicios():
     con = sql.connect("cleanwalkers.db")
@@ -328,6 +351,7 @@ def verificarServicios():
         con.execute(instruccion)
         con.commit()
         con.close()
+
 #Main
 prepareDatabase()
 verificarServicios()
