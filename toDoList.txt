@@ -5,8 +5,9 @@
 -Lectura el csv de cleanWalkers
 -Insertar datos a la base de datos
 
-
 Ideas de consultas
 -ventas según el mes
 -clientes según el mes
 -servicios vendidos según el mes
+-Gráfica pastel hombres mujeres
+-Gráfica pastel servicios
