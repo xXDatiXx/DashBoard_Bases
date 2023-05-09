@@ -10,6 +10,7 @@ import seaborn as sns
 import csv
 import datetime
 
+
 #Clase Ventana Login
 class WelcomeScreen(QMainWindow):
     def __init__(self):
@@ -290,20 +291,8 @@ class DashboardScreen(QMainWindow):
         super(DashboardScreen, self).__init__()
         loadUi("dashboard.ui", self)
         self.regresarButton.clicked.connect(self.gotoMain)
-        self.enero_pushButton.clicked.connect(lambda: self.mostrarGrafica(1))
-        self.febrero_pushButton.clicked.connect(lambda: self.mostrarGrafica(2))
-        self.marzo_pushButton.clicked.connect(lambda: self.mostrarGrafica(3))
-        self.abril_pushButton.clicked.connect(lambda: self.mostrarGrafica(4))
-        self.mayo_pushButton.clicked.connect(lambda: self.mostrarGrafica(5))
-        self.junio_pushButton.clicked.connect(lambda: self.mostrarGrafica(6))
-        self.julio_pushButton.clicked.connect(lambda: self.mostrarGrafica(7))
-        self.agosto_pushButton.clicked.connect(lambda: self.mostrarGrafica(8))
-        self.septiembre_pushButton.clicked.connect(lambda: self.mostrarGrafica(9))
-        self.octubre_pushButton.clicked.connect(lambda: self.mostrarGrafica(10))
-        self.noviembre_pushButton.clicked.connect(lambda: self.mostrarGrafica(11))
-        self.diciembre_pushButton.clicked.connect(lambda: self.mostrarGrafica(12))
-        self.all_pushButton.clicked.connect(lambda: self.mostrarGrafica(13))
         #Agregar imagen de fondo al graphicview
+        self.graphicsView.setStyleSheet("background-image: url(logo.png);")
 
 
     #Funciones
@@ -311,51 +300,6 @@ class DashboardScreen(QMainWindow):
         main = MainScreen()
         widget.addWidget(main)
         widget.setCurrentIndex(widget.currentIndex()+1)
-
-    def mostrarGrafica(self, opc):
-        if opc == 1:
-            #Grafica de barras de los mejores clientes en enero
-            #Sacar gráfica 1
-            #SQL query de los clientes con más visitas en enero
-            #SELECT NombreCliente, COUNT(*) FROM orden WHERE FechaOrden LIKE '%-01-%' GROUP BY NombreCliente ORDER BY COUNT(*) DESC LIMIT 5
-            self.graphicsView.setStyleSheet("background-image: url(grafica1.png);")
-        elif opc == 2:
-            #Grafica de barras de los mejores clientes en febrero
-            #Sacar gráfica 2
-            #self.graphicsView.setStyleSheet("background-image: url(grafica2.png);")
-            self.graphicsView.setStyleSheet("background-image: url(logo.png);")
-        elif opc == 3:
-            #Grafica de barras de los mejores clientes en marzo
-            #Sacar gráfica 3
-            self.graphicsView.setStyleSheet("background-image: url(grafica3.png);")
-        elif opc == 4:
-            #Sacar gráfica 4
-            self.graphicsView.setStyleSheet("background-image: url(grafica4.png);")
-        elif opc == 5:
-            #Sacar gráfica 5
-            self.graphicsView.setStyleSheet("background-image: url(grafica5.png);")
-        elif opc == 6:
-            #Sacar gráfica 6
-            self.graphicsView.setStyleSheet("background-image: url(grafica6.png);")
-        elif opc == 7:
-            #Sacar gráfica 7
-            self.graphicsView.setStyleSheet("background-image: url(grafica7.png);")
-        elif opc == 8:
-            #Sacar gráfica 8
-            self.graphicsView.setStyleSheet("background-image: url(grafica8.png);")
-        elif opc == 9:
-            self.graphicsView.setStyleSheet("background-image: url(grafica9.png);")
-        elif opc == 10:
-            self.graphicsView.setStyleSheet("background-image: url(grafica10.png);")
-        elif opc == 11:
-            self.graphicsView.setStyleSheet("background-image: url(grafica11.png);")
-        elif opc == 12:
-            self.graphicsView.setStyleSheet("background-image: url(grafica12.png);")
-        elif opc == 13:
-            #Grafica de barras de todos los tiempos
-            #Sacar gráfica 13
-            self.graphicsView.setStyleSheet("background-image: url(grafica13.png);")
-
 
 #Funcion para preparar la base de Datos
 def prepareDatabase():
