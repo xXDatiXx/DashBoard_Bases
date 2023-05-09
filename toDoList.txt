@@ -2,12 +2,14 @@
 2.Info de los queries a gráficas
 3. Poner gráficas en la ventana
 
--Lectura el csv de cleanWalkers
--Insertar datos a la base de datos
-
 Ideas de consultas
 -ventas según el mes
 -clientes según el mes
 -servicios vendidos según el mes
 -Gráfica pastel hombres mujeres
 -Gráfica pastel servicios
+
+
+Base de Datos
+-A la base de datos agregar DateTime de visita
+-Agregar querry de cliente mas visitado
