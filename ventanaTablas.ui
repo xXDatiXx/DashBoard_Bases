@@ -67,7 +67,7 @@ border-radius: 15px;</string>
 border-radius:10px;</string>
     </property>
     <property name="currentIndex">
-     <number>7</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="verUsuarios_tab">
      <attribute name="title">
@@ -1187,7 +1187,7 @@ padding-bottom: 7px;</string>
      <attribute name="title">
       <string>Otros</string>
      </attribute>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="dashboard_pushbutton">
       <property name="geometry">
        <rect>
         <x>50</x>

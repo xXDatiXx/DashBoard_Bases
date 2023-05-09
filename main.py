@@ -23,7 +23,7 @@ class WelcomeScreen(QMainWindow):
         if len(username) == 0 or len(password) == 0:
             self.aviso_lineedit.setText("")
             self.aviso_lineedit.setText("Por favor llena todos los campos.")
-        elif (username == "admin" and password == "admin"):
+        elif (username == "1" and password == "1"): #Usuario y contraseña vacios
          self.aviso_lineedit.setText("")
          self.gotoMain()
         else:
@@ -284,7 +284,7 @@ class MainScreen(QMainWindow):
 
 class DashboardScreen(QMainWindow):
     def __init__(self):
-        super(MainScreen, self).__init__()
+        super(DashboardScreen, self).__init__()
         loadUi("dashboard.ui", self)
 
 #Funcion para preparar la base de Datos
