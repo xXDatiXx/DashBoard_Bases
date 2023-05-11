@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1500</width>
+    <height>750</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,14 +18,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>800</width>
-    <height>600</height>
+    <width>1500</width>
+    <height>750</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>800</width>
-    <height>600</height>
+    <width>1500</width>
+    <height>750</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -35,26 +35,27 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>40</y>
-      <width>621</width>
-      <height>461</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1500</width>
+      <height>750</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>621</width>
-      <height>461</height>
+      <width>1500</width>
+      <height>750</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>621</width>
-      <height>461</height>
+      <width>1500</width>
+      <height>750</height>
      </size>
     </property>
     <property name="font">
      <font>
+      <weight>75</weight>
       <bold>true</bold>
       <kerning>true</kerning>
      </font>
@@ -64,7 +65,7 @@
 border-radius:10px;</string>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -397,8 +398,8 @@ QPushButton#alta_pushbutton:hover{
        <rect>
         <x>160</x>
         <y>30</y>
-        <width>371</width>
-        <height>371</height>
+        <width>220</width>
+        <height>220</height>
        </rect>
       </property>
      </widget>
@@ -1783,10 +1784,10 @@ QPushButton#alta_pushbutton:hover{
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>30</y>
-      <width>31</width>
-      <height>491</height>
+      <x>1460</x>
+      <y>20</y>
+      <width>41</width>
+      <height>671</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -1803,8 +1804,8 @@ border-radius: 15px;</string>
    <widget class="QPushButton" name="regresarButton">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>60</y>
+      <x>1465</x>
+      <y>40</y>
       <width>31</width>
       <height>31</height>
      </rect>
@@ -1813,6 +1814,7 @@ border-radius: 15px;</string>
      <font>
       <family>MS Outlook</family>
       <pointsize>18</pointsize>
+      <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
@@ -1834,8 +1836,8 @@ font: 18pt &quot;MS Outlook&quot;;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>30</height>
+     <width>1500</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
