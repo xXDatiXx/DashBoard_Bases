@@ -291,11 +291,19 @@ class DashboardScreen(QMainWindow):
         super(DashboardScreen, self).__init__()
         loadUi("dashboard.ui", self)
         self.regresarButton.clicked.connect(self.gotoMain)
+
         #Agregar imagen de fondo al graphicview
         self.calzado_graphicsView.setStyleSheet("background-image: url(logo.png);")
         self.client_graphicsView.setStyleSheet("background-image: url(logo.png);")
         self.empleados_graphicsView.setStyleSheet("background-image: url(logo.png);")
         self.servicios_graphicsView.setStyleSheet("background-image: url(logo.png);")
+        self.otros_graphicsView_1.setStyleSheet("background-image: url(logo.png);")
+        self.otros_graphicsView_2.setStyleSheet("background-image: url(logo.png);")
+        self.otros_graphicsView_3.setStyleSheet("background-image: url(logo.png);")
+        self.otros_graphicsView_4.setStyleSheet("background-image: url(logo.png);")
+        self.otros_graphicsView_5.setStyleSheet("background-image: url(logo.png);")
+        self.otros_graphicsView_6.setStyleSheet("background-image: url(logo.png);")
+        self.otros_graphicsView_7.setStyleSheet("background-image: url(logo.png);")
 
 
 
