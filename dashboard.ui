@@ -1462,7 +1462,7 @@ QPushButton#alta_pushbutton:hover{
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(17, 6, 166)</string>
+       <string notr="true">background-color: rgb(255, 236, 0)</string>
       </property>
       <property name="text">
        <string/>
@@ -1488,7 +1488,7 @@ QPushButton#alta_pushbutton:hover{
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(17, 6, 166)</string>
+       <string notr="true">background-color: rgb(255, 236, 0 )</string>
       </property>
       <property name="text">
        <string/>
@@ -1540,7 +1540,7 @@ QPushButton#alta_pushbutton:hover{
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(17, 6, 166)</string>
+       <string notr="true">background-color: rgb(255, 236, 0)</string>
       </property>
       <property name="text">
        <string/>
@@ -1579,8 +1579,7 @@ QPushButton#alta_pushbutton:hover{
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: qconicalgradient(cx:0.5, cy:0.5, angle:0, stop:0 rgb(111, 7, 156), stop:0.16 rgb(190, 25, 255), stop:0.225 rgb(219, 75, 255), stop:0.285 rgb(110, 26, 162), stop:0.345 rgb(203, 12, 255), stop:0.415 rgb(219, 10, 255), stop:0.52 rgb(102, 45, 181), stop:0.57 rgb(106, 14, 198), stop:0.635 rgb(219, 75, 255), stop:0.695 rgb(110, 26, 162), stop:0.75 rgb(187, 26, 255), stop:0.815 rgb(102, 45, 181), stop:0.88 rgb(106, 14, 198), stop:0.935 rgb(190, 25, 255), stop:1 rgb(111, 7, 156))
-</string>
+       <string notr="true">background-color: black</string>
       </property>
       <property name="text">
        <string/>
@@ -1596,7 +1595,7 @@ QPushButton#alta_pushbutton:hover{
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(17, 6, 166)</string>
+       <string notr="true">background-color: rgb(255, 236, 0)</string>
       </property>
       <property name="text">
        <string/>
@@ -1635,7 +1634,7 @@ QPushButton#alta_pushbutton:hover{
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(17, 6, 166)</string>
+       <string notr="true">background-color: rgb(255, 236, 0)</string>
       </property>
       <property name="text">
        <string/>
@@ -1651,7 +1650,7 @@ QPushButton#alta_pushbutton:hover{
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(17, 6, 166)</string>
+       <string notr="true">background-color: rgb(255, 236, 0)</string>
       </property>
       <property name="text">
        <string/>
@@ -1733,7 +1732,7 @@ border-radius: 15px;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(17, 6, 166)</string>
+       <string notr="true">background-color: rgb(255, 236, 0)</string>
       </property>
       <property name="text">
        <string/>
@@ -1825,7 +1824,7 @@ font: 18pt &quot;MS Outlook&quot;;</string>
      <x>0</x>
      <y>0</y>
      <width>1500</width>
-     <height>26</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>

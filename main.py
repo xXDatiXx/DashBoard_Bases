@@ -10,7 +10,6 @@ import seaborn as sns
 import csv
 import datetime
 
-
 #Clase Ventana Login
 class WelcomeScreen(QMainWindow):
     def __init__(self):
@@ -304,7 +303,6 @@ class DashboardScreen(QMainWindow):
         self.otros_graphicsView_5.setStyleSheet("background-image: url(logo.png);")
         self.otros_graphicsView_6.setStyleSheet("background-image: url(logo.png);")
         self.otros_graphicsView_7.setStyleSheet("background-image: url(logo.png);")
-
 
 
     #Funciones

@@ -1,3 +1,5 @@
+color amarillo: 255, 236, 0 
+
 1.Queries
 2.Info de los queries a gráficas
 3. Poner gráficas en la ventana
