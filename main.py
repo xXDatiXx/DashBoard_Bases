@@ -6,7 +6,7 @@ from PyQt6.QtSql import *
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *
 import sqlite3 as sql
-import seaborn as sns
+import pandas as pd
 import csv
 import datetime
 
@@ -293,6 +293,15 @@ class DashboardScreen(QMainWindow):
 
         #Agregar imagen de fondo al graphicview
         self.calzado_graphicsView.setStyleSheet("background-image: url(logo.png);")
+        #conectar con la base de datos
+        con = sql.connect("cleanwalkers.db")
+        #Consulta
+        clientes = con.execute("SELECT * FROM cliente", con)
+        query = "SELECT * FROM cliente FROM cliente"
+        clientes = pd.read_sql(query, con)
+        
+
+
         self.client_graphicsView.setStyleSheet("background-image: url(logo.png);")
         self.empleados_graphicsView.setStyleSheet("background-image: url(logo.png);")
         self.servicios_graphicsView.setStyleSheet("background-image: url(logo.png);")
