@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import csv
 import datetime
 
-#Clase Ventana Login
+#Clase Ventana Loginaaaa
 class WelcomeScreen(QMainWindow):
     def __init__(self):
         super(WelcomeScreen, self).__init__()
