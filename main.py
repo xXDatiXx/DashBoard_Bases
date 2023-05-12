@@ -6,7 +6,9 @@ from PyQt6.QtSql import *
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *
 import sqlite3 as sql
-import seaborn as sns
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 import csv
 import datetime
 
