@@ -7,9 +7,9 @@ from PyQt6.QtCore import *
 from PyQt6.QtGui import *
 import sqlite3 as sql
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from PIL import Image
 import csv
 import datetime
 
@@ -297,27 +297,40 @@ class DashboardScreen(QMainWindow):
         #Leer consulta de la base de datos
         con = sql.connect("cleanwalkers.db")
         cursor = con.cursor()
+
+        #clientes_graphicsView_1
+
+        self.clientes_graphicsView_1.setStyleSheet("background-image: url(graficas/logo.png);")
+
+        #clientes_graphicsView_2
+
+
+        #clientes_graphicsView_3
         cursor.execute("SELECT Sexo, TotalServicios FROM cliente")
-        result = cursor.fetchall()
-        print(result)
+        result = cursor.fetchall() #fetchall() -> lista de tuplas
         #seaborn barplot
-        df = pd.DataFrame(result)
-        df.columns = ["Sexo", "Cantidad"]
+        df = pd.DataFrame(result) #convertir lista de tuplas a dataframe
+        df.columns = ["Sexo", "Cantidad"] #asignar nombres a las columnas
         sns.barplot(x="Sexo", y="Cantidad", data=df, palette="Blues_d")
         #download image
         plt.savefig("graficas/cliente.png")
-        self.calzado_graphicsView.setStyleSheet("background-image: url(graficas/cliente.png);") 
+        #resize image with PIL
+        W = 511
+        H = 291
+        img = Image.open("graficas/cliente.png")
+        img = img.resize((W,H), Image.ANTIALIAS)
+        img.save("graficas/cliente.png")
+        self.clientes_graphicsView_3.setStyleSheet("background-image: url(graficas/cliente.png);")
+
         
-        self.client_graphicsView.setStyleSheet("background-image: url(logo.png);")
-        self.empleados_graphicsView.setStyleSheet("background-image: url(logo.png);")
-        self.servicios_graphicsView.setStyleSheet("background-image: url(logo.png);")
-        self.otros_graphicsView_1.setStyleSheet("background-image: url(logo.png);")
-        self.otros_graphicsView_2.setStyleSheet("background-image: url(logo.png);")
-        self.otros_graphicsView_3.setStyleSheet("background-image: url(logo.png);")
-        self.otros_graphicsView_4.setStyleSheet("background-image: url(logo.png);")
-        self.otros_graphicsView_5.setStyleSheet("background-image: url(logo.png);")
-        self.otros_graphicsView_6.setStyleSheet("background-image: url(logo.png);")
-        self.otros_graphicsView_7.setStyleSheet("background-image: url(logo.png);")
+
+        self.calzado_graphicsView.setStyleSheet("background-image: url(graficas/logo.png);")
+        self.empleados_graphicsView.setStyleSheet("background-image: url(graficas/logo.png);")
+        self.servicios_graphicsView.setStyleSheet("background-image: url(graficas/logo.png);")
+        self.clientes_graphicsView_4.setStyleSheet("background-image: url(graficas/logo.png);")
+        self.clientes_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.png);")
+        self.clientes_graphicsView_6.setStyleSheet("background-image: url(graficas/logo.png);")
+        self.clientes_graphicsView_7.setStyleSheet("background-image: url(graficas/logo.png);")
 
 
     #Funciones
