@@ -9,6 +9,7 @@ import sqlite3 as sql
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 import csv
 import datetime
 
@@ -293,8 +294,20 @@ class DashboardScreen(QMainWindow):
         loadUi("dashboard.ui", self)
         self.regresarButton.clicked.connect(self.gotoMain)
 
-        #Agregar imagen de fondo al graphicview
-        self.calzado_graphicsView.setStyleSheet("background-image: url(logo.png);")
+        #Leer consulta de la base de datos
+        con = sql.connect("cleanwalkers.db")
+        cursor = con.cursor()
+        cursor.execute("SELECT Sexo, TotalServicios FROM cliente")
+        result = cursor.fetchall()
+        print(result)
+        #seaborn barplot
+        df = pd.DataFrame(result)
+        df.columns = ["Sexo", "Cantidad"]
+        sns.barplot(x="Sexo", y="Cantidad", data=df, palette="Blues_d")
+        #download image
+        plt.savefig("graficas/cliente.png")
+        self.calzado_graphicsView.setStyleSheet("background-image: url(graficas/cliente.png);") 
+        
         self.client_graphicsView.setStyleSheet("background-image: url(logo.png);")
         self.empleados_graphicsView.setStyleSheet("background-image: url(logo.png);")
         self.servicios_graphicsView.setStyleSheet("background-image: url(logo.png);")
