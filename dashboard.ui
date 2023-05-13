@@ -149,7 +149,7 @@ border-radius:10px;</string>
        </rect>
       </property>
       <property name="text">
-       <string> Gráfica de Una cosa con Algo</string>
+       <string>Cantidad de clientes Hombres vs Mujeres</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_5">
@@ -201,7 +201,7 @@ border-radius:10px;</string>
        </rect>
       </property>
       <property name="text">
-       <string> Gráfica GRANDE de Una cosa con Algo</string>
+       <string>     Promedio de servicios hechos por Hombres vs Mujeres</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_6">

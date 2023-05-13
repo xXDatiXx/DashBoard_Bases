@@ -293,44 +293,118 @@ class DashboardScreen(QMainWindow):
         super(DashboardScreen, self).__init__()
         loadUi("dashboard.ui", self)
         self.regresarButton.clicked.connect(self.gotoMain)
+        resizePequeño = 220
 
         #Leer consulta de la base de datos
         con = sql.connect("cleanwalkers.db")
         cursor = con.cursor()
 
+
+        #------------------------
         #clientes_graphicsView_1
+        #------------------------
+        #grafica de pastel
+        cursor.execute("SELECT Sexo, COUNT(*) FROM cliente GROUP BY Sexo")
+        result = cursor.fetchall() #fetchall() -> lista de tuplas
+        #seaborn pieplot
+        df = pd.DataFrame(result) #convertir lista de tuplas a dataframe
+        df.columns = ["Sexo", "Cantidad"] #asignar nombres a las columnas
+        plt.figure(figsize=(5,5))
+        plt.pie(df["Cantidad"], labels=df["Sexo"], autopct='%1.1f%%', shadow=False, startangle=90)
+        #download image
+        plt.savefig("graficas/clientes1.png")
+        #resize image with PIL
+        img = Image.open("graficas/clientes1.png")
+        img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS) #antialias para que no se pixele
+        img.save("graficas/clientes1.png")
+        self.clientes_graphicsView_1.setStyleSheet("background-image: url(graficas/clientes1.png);")
+        #limpiar variables
+        plt.close()
+        
 
-        self.clientes_graphicsView_1.setStyleSheet("background-image: url(graficas/logo.png);")
-
+        #------------------------
         #clientes_graphicsView_2
-
-
-        #clientes_graphicsView_3
+        #------------------------
         cursor.execute("SELECT Sexo, TotalServicios FROM cliente")
         result = cursor.fetchall() #fetchall() -> lista de tuplas
         #seaborn barplot
         df = pd.DataFrame(result) #convertir lista de tuplas a dataframe
         df.columns = ["Sexo", "Cantidad"] #asignar nombres a las columnas
-        sns.barplot(x="Sexo", y="Cantidad", data=df, palette="Blues_d")
+        sns.barplot(x="Sexo", y="Cantidad", data=df, palette="rocket")
         #download image
-        plt.savefig("graficas/cliente.png")
+        plt.savefig("graficas/clientes2.png")
         #resize image with PIL
+        img = Image.open("graficas/clientes2.png")
+        img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
+        img.save("graficas/clientes2.png")
+        self.clientes_graphicsView_3.setStyleSheet("background-image: url(graficas/clientes2.png);")
+        #limpiar variables
+        plt.close()
+
+
+        #------------------------
+        #clientes_graphicsView_3
+        #------------------------
+        cursor.execute("SELECT Sexo, TotalServicios FROM cliente")
+        result = cursor.fetchall() #fetchall() -> lista de tuplas
+        #seaborn barplot
+        df = pd.DataFrame(result) #convertir lista de tuplas a dataframe
+        df.columns = ["Sexo", "Cantidad"] #asignar nombres a las columnas
+        sns.barplot(x="Sexo", y="Cantidad", data=df, palette="rocket")
+        #download image
+        plt.savefig("graficas/clientes3.png")
+        #resize image with PIL
+        img = Image.open("graficas/clientes3.png")
+        img = img.resize((511,291), Image.ANTIALIAS)
+        img.save("graficas/clientes3.png")
+        self.clientes_graphicsView_3.setStyleSheet("background-image: url(graficas/clientes3.png);")
+        #limpiar variables
+        plt.close()
+
+        #------------------------
+        #clientes_graphicsView_4
+        #------------------------
+        #Gráfica de barras Horizontal bar plots
+        #De los clientes que tengan mas TotalServicios, mostrar los 10 primeros con nombre
+        cursor.execute("SELECT NombreCliente, ApellidoCLiente, TotalServicios FROM cliente ORDER BY TotalServicios DESC LIMIT 10")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result) 
+        df.columns = ["Nombre", "Apellido", "TotalServicios"] 
+        df["Nombre"] = df["Nombre"] + " " + df["Apellido"]
+        df = df.drop(["Apellido"], axis=1) #eliminar columna Apellido 
+        sns.barplot(x="TotalServicios", y="Nombre", data=df, palette="rocket")
+        plt.savefig("graficas/clientes4.png")
+        img = Image.open("graficas/clientes4.png")
+        img = img.resize((320,580), Image.ANTIALIAS)
+        img.save("graficas/clientes4.png")
+        self.clientes_graphicsView_4.setStyleSheet("background-image: url(graficas/clientes4.png);")
+        plt.close()
+
+        #------------------------
+        #clientes_graphicsView_7
+        #------------------------
+        #Gráfica de barras
+        cursor.execute("SELECT TotalServicios FROM cliente")
+        result = cursor.fetchall() #fetchall() -> lista de tuplas
+        df = pd.DataFrame(result)
+        df.columns = ["Cantidad"]
+        sns.barplot(x=df.index, y="Cantidad", data=df, palette="Blues_d")
+        plt.savefig("graficas/clientes7.png")
         W = 511
         H = 291
-        img = Image.open("graficas/cliente.png")
+        img = Image.open("graficas/clientes7.png")
         img = img.resize((W,H), Image.ANTIALIAS)
-        img.save("graficas/cliente.png")
-        self.clientes_graphicsView_3.setStyleSheet("background-image: url(graficas/cliente.png);")
+        img.save("graficas/clientes7.png")
+        self.clientes_graphicsView_7.setStyleSheet("background-image: url(graficas/clientes7.png);")
+        plt.close()
 
         
-
         self.calzado_graphicsView.setStyleSheet("background-image: url(graficas/logo.png);")
         self.empleados_graphicsView.setStyleSheet("background-image: url(graficas/logo.png);")
         self.servicios_graphicsView.setStyleSheet("background-image: url(graficas/logo.png);")
         self.clientes_graphicsView_4.setStyleSheet("background-image: url(graficas/logo.png);")
         self.clientes_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.png);")
         self.clientes_graphicsView_6.setStyleSheet("background-image: url(graficas/logo.png);")
-        self.clientes_graphicsView_7.setStyleSheet("background-image: url(graficas/logo.png);")
 
 
     #Funciones
@@ -345,10 +419,10 @@ def prepareDatabase():
     db.setDatabaseName("cleanwalkers.db")
     if(db.open()):
         q = QSqlQuery()
-        if(q.prepare("CREATE TABLE IF NOT EXISTS calzado (idTenis INTEGER PRIMARY KEY AUTOINCREMENT, TipoCalzado varchar(50), ServicioContratado varchar(50), Marca varchar(50), Talla float, Color varchar(50), Materiales varchar(50), DetallesCalzado varchar(50), FechaLlegada date, Rack integer, Extra varchar(50), Precio integer, Cliente varchar(50), FOREIGN KEY (Cliente) REFERENCES cliente(NombreCliente))")):
+        if(q.prepare("CREATE TABLE IF NOT EXISTS calzado (idTenis INTEGER PRIMARY KEY AUTOINCREMENT, TipoCalzado varchar(50), ServicioContratado varchar(50), Marca varchar(50), Talla float, Color varchar(50), Materiales varchar(50), DetallesCalzado varchar(50), FechaLlegada date, Rack integer, Extra varchar(50), Cliente varchar(50), FOREIGN KEY (Cliente) REFERENCES cliente(NombreCliente))")):
             if(q.exec()):
                 print("Tabla calzado creada")
-        if(q.prepare("CREATE TABLE IF NOT EXISTS servicio (NombreServicio varchar(50) primary key not null, Costo float, PromedioEntrega varchar(50))")):
+        if(q.prepare("CREATE TABLE IF NOT EXISTS servicio (NombreServicio varchar(50) PRIMARY KEY not null, Costo float, PromedioEntrega varchar(50))")):
             if(q.exec()):
                 print("Tabla servicio creada")
         if(q.prepare("CREATE TABLE IF NOT EXISTS cliente (idCliente INTEGER PRIMARY KEY AUTOINCREMENT, NombreCliente varchar(50), ApellidoCliente varchar(50), Correo varchar(50), Telefono integer, Sexo varchar(50), FechaNacimineto date, TotalVisitas integer, TotalServicios integer, FechaRegistro date)")):
@@ -357,7 +431,7 @@ def prepareDatabase():
         if(q.prepare("CREATE TABLE IF NOT EXISTS orden (idOrden INTEGER PRIMARY KEY AUTOINCREMENT, idCliente varchar(50), idTenis integer, FechaLlegada date, Costo float, FOREIGN KEY (idCliente) REFERENCES cliente(idCliente), FOREIGN KEY (idTenis) REFERENCES calzado(idTenis))")):
             if(q.exec()):
                 print("Tabla orden creada")
-        if(q.prepare("CREATE TABLE IF NOT EXISTS empleado (idEmpleado INTEGER PRIMARY KEY AUTOINCREMENT, NombreEmpleado varchar(50), ApellidoEmpleado varchar(50), Telefono integer, Correo varchar(50), FechaRegistro date)")):
+        if(q.prepare("CREATE TABLE IF NOT EXISTS empleado (idEmpleado INTEGER PRIMARY KEY AUTOINCREMENT, NombreEmpleado varchar(50), ApellidoEmpleado varchar(50), Telefono integer, Correo varchar(50), idTenisLavados integer)")):
             if(q.exec()):
                 print("Tabla empleado creada")
     #Agregar datos de prueba de clientesCW.csv
@@ -385,7 +459,7 @@ def verificarServicios():
         con.execute(instruccion)
         instruccion = (f"INSERT INTO servicio (NombreServicio, Costo, PromedioEntrega) VALUES ('VIP', 180, '1 semana')")
         con.execute(instruccion)
-        instruccion = (f"INSERT INTO servicio (NombreServicio, Costo, PromedioEntrega) VALUES ('Utra White', 160, '1 semana')")
+        instruccion = (f"INSERT INTO servicio (NombreServicio, Costo, PromedioEntrega) VALUES ('Ultra White', 160, '1 semana')")
         con.execute(instruccion)
         instruccion = (f"INSERT INTO servicio (NombreServicio, Costo, PromedioEntrega) VALUES ('Suede', 150, '1 semana')")
         con.execute(instruccion)
@@ -396,7 +470,7 @@ def verificarServicios():
 prepareDatabase()
 verificarServicios()
 app = QApplication(sys.argv)
-welcome = WelcomeScreen()
+welcome = DashboardScreen() #WelcomeScreen CAMBIAR
 widget = QtWidgets.QStackedWidget()
 widget.addWidget(welcome)
 widget.show()
