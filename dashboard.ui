@@ -65,7 +65,7 @@
 border-radius:10px;</string>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_6">
      <attribute name="title">
@@ -243,14 +243,14 @@ border-radius:10px;</string>
       <property name="geometry">
        <rect>
         <x>1440</x>
-        <y>0</y>
+        <y>20</y>
         <width>51</width>
-        <height>341</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">
-background-color:qlineargradient(spread:pad, x1:1, y1:2, x2:0, y2:0, stop:0 rgba(195,34,127), stop:0.502488 rgba(195,34,127,1), stop:1 rgba(253,187,45,1));
+background-color:qlineargradient(spread:pad, x1:1, y1:2, x2:0, y2:0, stop:0 rgba(0, 0, 0, 1), stop:0.302488 rgba(0, 0, 0, 1), stop:1 rgba(255,236,0, 1));
 
 
 border-radius: 15px;</string>
@@ -309,7 +309,7 @@ border-radius: 15px;</string>
       <property name="geometry">
        <rect>
         <x>1445</x>
-        <y>20</y>
+        <y>30</y>
         <width>41</width>
         <height>41</height>
        </rect>
@@ -327,7 +327,7 @@ border-radius: 15px;</string>
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #fdbb2d;
+       <string notr="true">background-color: rgb(255, 236,0);
 font: 18pt &quot;MS Outlook&quot;;</string>
       </property>
       <property name="text">
@@ -512,14 +512,14 @@ font: 18pt &quot;MS Outlook&quot;;</string>
       <property name="geometry">
        <rect>
         <x>1440</x>
-        <y>0</y>
+        <y>20</y>
         <width>51</width>
-        <height>341</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">
-background-color:qlineargradient(spread:pad, x1:1, y1:2, x2:0, y2:0, stop:0 rgba(195,34,127), stop:0.502488 rgba(195,34,127,1), stop:1 rgba(253,187,45,1));
+background-color:qlineargradient(spread:pad, x1:1, y1:2, x2:0, y2:0, stop:0 rgba(0, 0, 0, 1), stop:0.302488 rgba(0, 0, 0, 1), stop:1 rgba(255,236,0, 1));
 
 
 border-radius: 15px;</string>
@@ -631,7 +631,7 @@ border-radius: 15px;</string>
       <property name="geometry">
        <rect>
         <x>1445</x>
-        <y>20</y>
+        <y>30</y>
         <width>41</width>
         <height>41</height>
        </rect>
@@ -649,7 +649,7 @@ border-radius: 15px;</string>
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #fdbb2d;
+       <string notr="true">background-color: rgb(255,236,0);
 font: 18pt &quot;MS Outlook&quot;;</string>
       </property>
       <property name="text">
@@ -832,14 +832,13 @@ font: 18pt &quot;MS Outlook&quot;;</string>
       <property name="geometry">
        <rect>
         <x>1440</x>
-        <y>0</y>
+        <y>20</y>
         <width>51</width>
-        <height>341</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">
-background-color:qlineargradient(spread:pad, x1:1, y1:2, x2:0, y2:0, stop:0 rgba(195,34,127), stop:0.502488 rgba(195,34,127,1), stop:1 rgba(253,187,45,1));
+       <string notr="true">background-color:qlineargradient(spread:pad, x1:1, y1:2, x2:0, y2:0, stop:0 rgba(0, 0, 0, 1), stop:0.302488 rgba(0, 0, 0, 1), stop:1 rgba(255,236,0, 1));
 
 
 border-radius: 15px;</string>
@@ -875,7 +874,7 @@ border-radius: 15px;</string>
       <property name="geometry">
        <rect>
         <x>959</x>
-        <y>359</y>
+        <y>360</y>
         <width>241</width>
         <height>291</height>
        </rect>
@@ -964,7 +963,7 @@ border-radius: 15px;</string>
       <property name="geometry">
        <rect>
         <x>1445</x>
-        <y>20</y>
+        <y>30</y>
         <width>41</width>
         <height>41</height>
        </rect>
@@ -982,7 +981,7 @@ border-radius: 15px;</string>
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #fdbb2d;
+       <string notr="true">background-color: rgb(255,236,0);
 font: 18pt &quot;MS Outlook&quot;;</string>
       </property>
       <property name="text">
@@ -1154,10 +1153,10 @@ font: 18pt &quot;MS Outlook&quot;;</string>
      <widget class="QGraphicsView" name="servicios_graphicsView_8">
       <property name="geometry">
        <rect>
-        <x>1229</x>
-        <y>364</y>
+        <x>1230</x>
+        <y>360</y>
         <width>241</width>
-        <height>281</height>
+        <height>291</height>
        </rect>
       </property>
      </widget>
@@ -1165,16 +1164,13 @@ font: 18pt &quot;MS Outlook&quot;;</string>
       <property name="geometry">
        <rect>
         <x>1440</x>
-        <y>0</y>
+        <y>20</y>
         <width>51</width>
-        <height>341</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">
-background-color:qlineargradient(spread:pad, x1:1, y1:2, x2:0, y2:0, stop:0 rgba(195,34,127), stop:0.502488 rgba(195,34,127,1), stop:1 rgba(253,187,45,1));
-
-
+       <string notr="true">background-color:qlineargradient(spread:pad, x1:1, y1:2, x2:0, y2:0, stop:0 rgba(0, 0, 0, 1), stop:0.302488 rgba(0, 0, 0, 1), stop:1 rgba(255,236,0, 1));
 border-radius: 15px;</string>
       </property>
       <property name="text">
@@ -1208,9 +1204,9 @@ border-radius: 15px;</string>
       <property name="geometry">
        <rect>
         <x>959</x>
-        <y>364</y>
+        <y>360</y>
         <width>241</width>
-        <height>281</height>
+        <height>291</height>
        </rect>
       </property>
      </widget>
@@ -1227,8 +1223,8 @@ border-radius: 15px;</string>
      <widget class="QGraphicsView" name="servicios_graphicsView_1">
       <property name="geometry">
        <rect>
-        <x>29</x>
-        <y>29</y>
+        <x>30</x>
+        <y>30</y>
         <width>241</width>
         <height>241</height>
        </rect>
@@ -1247,8 +1243,8 @@ border-radius: 15px;</string>
      <widget class="QGraphicsView" name="servicios_graphicsView_3">
       <property name="geometry">
        <rect>
-        <x>299</x>
-        <y>29</y>
+        <x>300</x>
+        <y>30</y>
         <width>241</width>
         <height>241</height>
        </rect>
@@ -1284,7 +1280,7 @@ border-radius: 15px;</string>
       <property name="geometry">
        <rect>
         <x>1445</x>
-        <y>20</y>
+        <y>30</y>
         <width>41</width>
         <height>41</height>
        </rect>
@@ -1302,7 +1298,7 @@ border-radius: 15px;</string>
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #fdbb2d;
+       <string notr="true">background-color: rgb(255,236,0);
 font: 18pt &quot;MS Outlook&quot;;</string>
       </property>
       <property name="text">

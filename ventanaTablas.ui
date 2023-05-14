@@ -67,7 +67,7 @@ border-radius: 15px;</string>
 border-radius:10px;</string>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>7</number>
     </property>
     <widget class="QWidget" name="verUsuarios_tab">
      <attribute name="title">
@@ -1254,11 +1254,19 @@ padding-bottom: 7px;</string>
      <widget class="QPushButton" name="dashboard_pushbutton">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>80</y>
-        <width>91</width>
-        <height>31</height>
+        <x>200</x>
+        <y>50</y>
+        <width>261</width>
+        <height>81</height>
        </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 236, 0);
+
+font: 75 30pt &quot;Arial&quot;;</string>
       </property>
       <property name="text">
        <string>Ir a dashboard</string>

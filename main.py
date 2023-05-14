@@ -12,6 +12,7 @@ import seaborn as sns
 from PIL import Image
 import csv
 import datetime
+import random
 
 #Clase Ventana Login
 class WelcomeScreen(QMainWindow):
@@ -325,12 +326,37 @@ class DashboardScreen(QMainWindow):
         #limpiar variables
         plt.close()
 
-        
         #------------------------
         #clientes_graphicsView_2
         #------------------------
         #Grafica histplot sobre la edad de los clientes
-
+        cursor.execute("SELECT FechaNacimiento FROM cliente")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["FechaNacimiento"]
+        #Formato de fecha en db es dd/mm/yyyy
+        #Se convierte a yyyy
+        df["FechaNacimiento"] = df["FechaNacimiento"].str.slice(start=6)
+        df["FechaNacimiento"] = df["FechaNacimiento"].astype(int)
+        df["FechaNacimiento"] = 2023 - df["FechaNacimiento"]
+        #Verificar que no haya edades menores a 10 ni mayores a 100 años y si hay ponerlos entre 10 y 50
+        for i in range(len(df["FechaNacimiento"])):
+            if df["FechaNacimiento"][i] < 10 or df["FechaNacimiento"][i] > 100:
+                df["FechaNacimiento"][i] = random.randint(10,50)
+        plt.figure (figsize=(4,4))
+        plt.title("Número de clientes por edad")
+        plt.ylabel("Total")
+        plt.xlabel("Edad")
+        plt.hist(df["FechaNacimiento"], bins=10, color="#F2C94C")
+        #download image
+        plt.savefig("graficas/clientes2.png")
+        #resize image with PIL
+        img = Image.open("graficas/clientes2.png")
+        img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
+        img.save("graficas/clientes2.png")
+        self.clientes_graphicsView_2.setStyleSheet("background-image: url(graficas/clientes2.png);")
+        #limpiar variables
+        plt.close()
 
         #------------------------
         #clientes_graphicsView_3
@@ -378,7 +404,32 @@ class DashboardScreen(QMainWindow):
         #------------------------
         #clientes_graphicsView_5
         #------------------------
-        #Histograma de la fechaRegistro de los clientes
+        #Lineplot de la fechaRegistro de los clientes
+        # cursor.execute("SELECT FechaRegistro FROM cliente")
+        # result = cursor.fetchall()
+        # df = pd.DataFrame(result)
+        # df.columns = ["FechaRegistro"]
+        # #Formato de fecha en db es dd/mm/yyyy
+        # #Se convierte a mm
+        # df["FechaRegistro"] = df["FechaRegistro"].str.slice(start=3, stop=5)
+        # df["FechaRegistro"] = df["FechaRegistro"].astype(int)
+        # df["FechaRegistro"] = df["FechaRegistro"].replace([1,2,3,4,5,6,7,8,9,10,11,12], ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto","Septiembre", "Octubre", "Noviembre", "Diciembre"])
+
+        # plt.figure (figsize=(4,4))
+        # plt.title("Fecha de registro de los clientes")
+        # plt.ylabel("Total")
+        # plt.xlabel("Fecha")
+        # plt.plot(df["FechaRegistro"], color="#F2C94C")
+        # #download image
+        # plt.savefig("graficas/clientes5.png")
+        # #resize image with PIL
+        # img = Image.open("graficas/clientes5.png")
+        # img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
+        # img.save("graficas/clientes5.png")
+        # self.clientes_graphicsView_5.setStyleSheet("background-image: url(graficas/clientes5.png);")
+        # #limpiar variables
+        # plt.close()
+
 
         #------------------------
         #clientes_graphicsView_6
@@ -509,7 +560,7 @@ def verificarServicios():
         con.close()
 
 #Main
-prepareDatabase()
+#prepareDatabase()
 verificarServicios()
 app = QApplication(sys.argv)
 welcome = DashboardScreen() #WelcomeScreen CAMBIAR
