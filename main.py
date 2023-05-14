@@ -296,7 +296,7 @@ class DashboardScreen(QMainWindow):
         self.regresarButton_11.clicked.connect(self.gotoMain)
         self.regresarButton_12.clicked.connect(self.gotoMain)
         self.regresarButton_13.clicked.connect(self.gotoMain)
-        resizePequeño = 220
+        resizePequeño = 240
 
         #Leer consulta de la base de datos
         con = sql.connect("cleanwalkers.db")
@@ -312,6 +312,7 @@ class DashboardScreen(QMainWindow):
         df = pd.DataFrame(result)
         df.columns = ["Sexo", "Total"]
         plt.figure (figsize=(4,4))
+        plt.title("Sexo de los clientes")
         plt.pie(df["Total"], labels=df["Sexo"], autopct="%1.1f%%", shadow=True, startangle=90, colors=["#F2C94C", "#0f3463"])
         plt.axis("equal")
         #download image
@@ -340,12 +341,13 @@ class DashboardScreen(QMainWindow):
         df = pd.DataFrame(result)
         df.columns = ["Sexo", "Promedio"]
         plt.figure (figsize=(5,5))
+        plt.title("Promedio de servicios por sexo")
         plt.bar(df["Sexo"], df["Promedio"], color=["#F2C94C", "#0f3463"])
         #download image
         plt.savefig("graficas/clientes3.png")
         #resize image with PIL
         img = Image.open("graficas/clientes3.png")
-        img = img.resize((511,291), Image.ANTIALIAS)
+        img = img.resize((511,351), Image.ANTIALIAS)
         img.save("graficas/clientes3.png")
         self.clientes_graphicsView_3.setStyleSheet("background-image: url(graficas/clientes3.png);")
         #limpiar variables
@@ -364,10 +366,11 @@ class DashboardScreen(QMainWindow):
         df = df.drop(["Apellido"], axis=1) #eliminar columna Apellido 
         #inclinar los nombres
         plt.yticks(rotation=45)
+        plt.title("Clientes con mas servicios")
         sns.barplot(x="TotalServicios", y="Nombre", data=df, palette="cividis")
         plt.savefig("graficas/clientes4.png")
         img = Image.open("graficas/clientes4.png")
-        img = img.resize((320,580), Image.ANTIALIAS)
+        img = img.resize((341,621), Image.ANTIALIAS)
         img.save("graficas/clientes4.png")
         self.clientes_graphicsView_4.setStyleSheet("background-image: url(graficas/clientes4.png);")
         plt.close()
@@ -388,8 +391,6 @@ class DashboardScreen(QMainWindow):
         #Gráfica de barras
 
 
-        self.calzado_graphicsView_1.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        self.calzado_graphicsView_3.setStyleSheet("background-image: url(graficas/logo.jpg);")
         self.calzado_graphicsView_4.setStyleSheet("background-image: url(graficas/logo.jpg);")
         #scatter plot, fechaLlegada vs calzado en ese día
         self.calzado_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")

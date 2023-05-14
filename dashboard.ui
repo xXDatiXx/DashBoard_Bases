@@ -65,7 +65,7 @@
 border-radius:10px;</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab_6">
      <attribute name="title">
@@ -93,7 +93,7 @@ border-radius:10px;</string>
         <x>290</x>
         <y>20</y>
         <width>261</width>
-        <height>281</height>
+        <height>261</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -106,10 +106,10 @@ border-radius:10px;</string>
      <widget class="QGraphicsView" name="clientes_graphicsView_2">
       <property name="geometry">
        <rect>
-        <x>310</x>
+        <x>300</x>
         <y>30</y>
-        <width>220</width>
-        <height>220</height>
+        <width>240</width>
+        <height>240</height>
        </rect>
       </property>
      </widget>
@@ -119,7 +119,7 @@ border-radius:10px;</string>
         <x>20</x>
         <y>20</y>
         <width>261</width>
-        <height>281</height>
+        <height>261</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -132,46 +132,20 @@ border-radius:10px;</string>
      <widget class="QGraphicsView" name="clientes_graphicsView_1">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>30</x>
         <y>30</y>
-        <width>220</width>
-        <height>220</height>
+        <width>240</width>
+        <height>240</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_4">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>265</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Cantidad de clientes Hombres vs Mujeres</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_5">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>265</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Edad de los clientes</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_7">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>320</y>
+        <y>290</y>
         <width>531</width>
-        <height>341</height>
+        <height>371</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -185,23 +159,10 @@ border-radius:10px;</string>
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>330</y>
+        <y>300</y>
         <width>511</width>
-        <height>291</height>
+        <height>351</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_8">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>630</y>
-        <width>481</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>     Promedio de servicios hechos por Hombres vs Mujeres</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_6">
@@ -239,33 +200,20 @@ border-radius:10px;</string>
      <widget class="QGraphicsView" name="clientes_graphicsView_4">
       <property name="geometry">
        <rect>
-        <x>590</x>
-        <y>40</y>
-        <width>321</width>
-        <height>581</height>
+        <x>580</x>
+        <y>30</y>
+        <width>341</width>
+        <height>621</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_10">
-      <property name="geometry">
-       <rect>
-        <x>590</x>
-        <y>630</y>
-        <width>321</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Top 10 clientes que mas servicios han contratado</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_12">
       <property name="geometry">
        <rect>
         <x>950</x>
-        <y>365</y>
+        <y>355</y>
         <width>261</width>
-        <height>281</height>
+        <height>301</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -278,10 +226,10 @@ border-radius:10px;</string>
      <widget class="QLabel" name="label_13">
       <property name="geometry">
        <rect>
-        <x>1230</x>
-        <y>365</y>
+        <x>1220</x>
+        <y>355</y>
         <width>261</width>
-        <height>281</height>
+        <height>301</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -314,56 +262,30 @@ border-radius: 15px;</string>
      <widget class="QGraphicsView" name="clientes_graphicsView_5">
       <property name="geometry">
        <rect>
-        <x>970</x>
-        <y>375</y>
-        <width>220</width>
-        <height>220</height>
+        <x>960</x>
+        <y>360</y>
+        <width>240</width>
+        <height>291</height>
        </rect>
       </property>
      </widget>
      <widget class="QGraphicsView" name="clientes_graphicsView_6">
       <property name="geometry">
        <rect>
-        <x>1250</x>
-        <y>375</y>
-        <width>220</width>
-        <height>220</height>
+        <x>1230</x>
+        <y>360</y>
+        <width>240</width>
+        <height>291</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_14">
-      <property name="geometry">
-       <rect>
-        <x>970</x>
-        <y>610</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica de Una cosa con Algo</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_15">
-      <property name="geometry">
-       <rect>
-        <x>1250</x>
-        <y>610</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica de Una cosa con Algo</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_11">
       <property name="geometry">
        <rect>
         <x>950</x>
-        <y>30</y>
+        <y>20</y>
         <width>481</width>
-        <height>301</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -377,23 +299,10 @@ border-radius: 15px;</string>
       <property name="geometry">
        <rect>
         <x>960</x>
-        <y>40</y>
+        <y>30</y>
         <width>461</width>
-        <height>251</height>
+        <height>301</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_16">
-      <property name="geometry">
-       <rect>
-        <x>970</x>
-        <y>300</y>
-        <width>441</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica GRANDE de Una cosa con Algo</string>
       </property>
      </widget>
      <widget class="QPushButton" name="regresarButton">
@@ -431,24 +340,17 @@ font: 18pt &quot;MS Outlook&quot;;</string>
      <zorder>clientes_graphicsView_2</zorder>
      <zorder>label_3</zorder>
      <zorder>clientes_graphicsView_1</zorder>
-     <zorder>label_4</zorder>
-     <zorder>label_5</zorder>
      <zorder>label_7</zorder>
      <zorder>clientes_graphicsView_3</zorder>
-     <zorder>label_8</zorder>
      <zorder>label_9</zorder>
      <zorder>clientes_graphicsView_4</zorder>
-     <zorder>label_10</zorder>
      <zorder>label_12</zorder>
      <zorder>label_13</zorder>
      <zorder>label</zorder>
      <zorder>clientes_graphicsView_5</zorder>
      <zorder>clientes_graphicsView_6</zorder>
-     <zorder>label_14</zorder>
-     <zorder>label_15</zorder>
      <zorder>label_11</zorder>
      <zorder>clientes_graphicsView_7</zorder>
-     <zorder>label_16</zorder>
      <zorder>regresarButton</zorder>
     </widget>
     <widget class="QWidget" name="tab">
@@ -475,9 +377,9 @@ font: 18pt &quot;MS Outlook&quot;;</string>
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>320</y>
+        <y>290</y>
         <width>531</width>
-        <height>341</height>
+        <height>371</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -490,10 +392,10 @@ font: 18pt &quot;MS Outlook&quot;;</string>
      <widget class="QLabel" name="label_101">
       <property name="geometry">
        <rect>
-        <x>1230</x>
-        <y>365</y>
+        <x>1220</x>
+        <y>355</y>
         <width>261</width>
-        <height>281</height>
+        <height>301</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -554,7 +456,7 @@ font: 18pt &quot;MS Outlook&quot;;</string>
         <x>290</x>
         <y>20</y>
         <width>261</width>
-        <height>281</height>
+        <height>261</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -570,7 +472,7 @@ font: 18pt &quot;MS Outlook&quot;;</string>
         <x>20</x>
         <y>20</y>
         <width>261</width>
-        <height>281</height>
+        <height>261</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -584,9 +486,9 @@ font: 18pt &quot;MS Outlook&quot;;</string>
       <property name="geometry">
        <rect>
         <x>950</x>
-        <y>365</y>
+        <y>355</y>
         <width>261</width>
-        <height>281</height>
+        <height>301</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -599,10 +501,10 @@ font: 18pt &quot;MS Outlook&quot;;</string>
      <widget class="QGraphicsView" name="calzado_graphicsView_8">
       <property name="geometry">
        <rect>
-        <x>1250</x>
-        <y>375</y>
-        <width>220</width>
-        <height>220</height>
+        <x>1230</x>
+        <y>360</y>
+        <width>241</width>
+        <height>291</height>
        </rect>
       </property>
      </widget>
@@ -626,19 +528,6 @@ border-radius: 15px;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_107">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>265</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica de Una cosa con Algo</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_108">
       <property name="geometry">
        <rect>
@@ -652,96 +541,44 @@ border-radius: 15px;</string>
        <string> Gráfica GRANDE de Una cosa con Algo</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_109">
-      <property name="geometry">
-       <rect>
-        <x>1250</x>
-        <y>610</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica de Una cosa con Algo</string>
-      </property>
-     </widget>
      <widget class="QGraphicsView" name="calzado_graphicsView_5">
       <property name="geometry">
        <rect>
-        <x>590</x>
-        <y>40</y>
-        <width>321</width>
-        <height>581</height>
+        <x>580</x>
+        <y>30</y>
+        <width>341</width>
+        <height>621</height>
        </rect>
       </property>
      </widget>
      <widget class="QGraphicsView" name="calzado_graphicsView_7">
       <property name="geometry">
        <rect>
-        <x>970</x>
-        <y>375</y>
-        <width>220</width>
-        <height>220</height>
+        <x>959</x>
+        <y>360</y>
+        <width>241</width>
+        <height>291</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_110">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>265</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Cantidad de clientes Hombres vs Mujeres</string>
       </property>
      </widget>
      <widget class="QGraphicsView" name="calzado_graphicsView_4">
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>330</y>
+        <y>300</y>
         <width>511</width>
-        <height>291</height>
+        <height>351</height>
        </rect>
       </property>
      </widget>
      <widget class="QGraphicsView" name="calzado_graphicsView_1">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>30</x>
         <y>30</y>
-        <width>220</width>
-        <height>220</height>
+        <width>240</width>
+        <height>240</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_111">
-      <property name="geometry">
-       <rect>
-        <x>590</x>
-        <y>630</y>
-        <width>321</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica Alargada de Una cosa con Algo</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_112">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>630</y>
-        <width>481</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>     Promedio de servicios hechos por Hombres vs Mujeres</string>
       </property>
      </widget>
      <widget class="QGraphicsView" name="clientes_graphicsView_49">
@@ -757,10 +594,10 @@ border-radius: 15px;</string>
      <widget class="QGraphicsView" name="calzado_graphicsView_3">
       <property name="geometry">
        <rect>
-        <x>310</x>
+        <x>300</x>
         <y>30</y>
-        <width>220</width>
-        <height>220</height>
+        <width>241</width>
+        <height>241</height>
        </rect>
       </property>
      </widget>
@@ -768,9 +605,9 @@ border-radius: 15px;</string>
       <property name="geometry">
        <rect>
         <x>950</x>
-        <y>30</y>
+        <y>20</y>
         <width>481</width>
-        <height>301</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -780,40 +617,14 @@ border-radius: 15px;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_114">
-      <property name="geometry">
-       <rect>
-        <x>970</x>
-        <y>610</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica de Una cosa con Algo</string>
-      </property>
-     </widget>
      <widget class="QGraphicsView" name="calzado_graphicsView_6">
       <property name="geometry">
        <rect>
         <x>960</x>
-        <y>40</y>
+        <y>30</y>
         <width>461</width>
-        <height>251</height>
+        <height>301</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_146">
-      <property name="geometry">
-       <rect>
-        <x>970</x>
-        <y>300</y>
-        <width>441</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica GRANDE de Una cosa con Algo</string>
       </property>
      </widget>
      <widget class="QPushButton" name="regresarButton_11">
@@ -886,9 +697,9 @@ font: 18pt &quot;MS Outlook&quot;;</string>
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>320</y>
+        <y>290</y>
         <width>531</width>
-        <height>341</height>
+        <height>371</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -901,10 +712,10 @@ font: 18pt &quot;MS Outlook&quot;;</string>
      <widget class="QLabel" name="label_116">
       <property name="geometry">
        <rect>
-        <x>1230</x>
-        <y>365</y>
+        <x>1220</x>
+        <y>355</y>
         <width>261</width>
-        <height>281</height>
+        <height>301</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -965,7 +776,7 @@ font: 18pt &quot;MS Outlook&quot;;</string>
         <x>290</x>
         <y>20</y>
         <width>261</width>
-        <height>281</height>
+        <height>261</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -981,7 +792,7 @@ font: 18pt &quot;MS Outlook&quot;;</string>
         <x>20</x>
         <y>20</y>
         <width>261</width>
-        <height>281</height>
+        <height>261</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -995,9 +806,9 @@ font: 18pt &quot;MS Outlook&quot;;</string>
       <property name="geometry">
        <rect>
         <x>950</x>
-        <y>365</y>
+        <y>355</y>
         <width>261</width>
-        <height>281</height>
+        <height>301</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -1010,10 +821,10 @@ font: 18pt &quot;MS Outlook&quot;;</string>
      <widget class="QGraphicsView" name="empleados_graphicsView_8">
       <property name="geometry">
        <rect>
-        <x>1250</x>
-        <y>375</y>
-        <width>220</width>
-        <height>220</height>
+        <x>1230</x>
+        <y>360</y>
+        <width>241</width>
+        <height>291</height>
        </rect>
       </property>
      </widget>
@@ -1037,19 +848,6 @@ border-radius: 15px;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_122">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>265</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica de Una cosa con Algo</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_123">
       <property name="geometry">
        <rect>
@@ -1063,96 +861,44 @@ border-radius: 15px;</string>
        <string> Gráfica GRANDE de Una cosa con Algo</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_124">
-      <property name="geometry">
-       <rect>
-        <x>1250</x>
-        <y>610</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica de Una cosa con Algo</string>
-      </property>
-     </widget>
      <widget class="QGraphicsView" name="empleados_graphicsView_5">
       <property name="geometry">
        <rect>
-        <x>590</x>
-        <y>40</y>
-        <width>321</width>
-        <height>581</height>
+        <x>580</x>
+        <y>30</y>
+        <width>341</width>
+        <height>621</height>
        </rect>
       </property>
      </widget>
      <widget class="QGraphicsView" name="empleados_graphicsView_7">
       <property name="geometry">
        <rect>
-        <x>970</x>
-        <y>380</y>
-        <width>220</width>
-        <height>220</height>
+        <x>959</x>
+        <y>359</y>
+        <width>241</width>
+        <height>291</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_125">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>265</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Cantidad de clientes Hombres vs Mujeres</string>
       </property>
      </widget>
      <widget class="QGraphicsView" name="empleados_graphicsView_4">
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>330</y>
+        <y>300</y>
         <width>511</width>
-        <height>291</height>
+        <height>351</height>
        </rect>
       </property>
      </widget>
      <widget class="QGraphicsView" name="empleados_graphicsView_1">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>30</x>
         <y>30</y>
-        <width>220</width>
-        <height>220</height>
+        <width>241</width>
+        <height>241</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_126">
-      <property name="geometry">
-       <rect>
-        <x>590</x>
-        <y>630</y>
-        <width>321</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica Alargada de Una cosa con Algo</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_127">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>630</y>
-        <width>481</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>     Promedio de servicios hechos por Hombres vs Mujeres</string>
       </property>
      </widget>
      <widget class="QGraphicsView" name="clientes_graphicsView_56">
@@ -1168,10 +914,10 @@ border-radius: 15px;</string>
      <widget class="QGraphicsView" name="empleados_graphicsView_3">
       <property name="geometry">
        <rect>
-        <x>310</x>
+        <x>300</x>
         <y>30</y>
-        <width>220</width>
-        <height>220</height>
+        <width>241</width>
+        <height>241</height>
        </rect>
       </property>
      </widget>
@@ -1179,9 +925,9 @@ border-radius: 15px;</string>
       <property name="geometry">
        <rect>
         <x>950</x>
-        <y>30</y>
+        <y>20</y>
         <width>481</width>
-        <height>301</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -1191,26 +937,13 @@ border-radius: 15px;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_129">
-      <property name="geometry">
-       <rect>
-        <x>970</x>
-        <y>610</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica de Una cosa con Algo</string>
-      </property>
-     </widget>
      <widget class="QGraphicsView" name="empleados_graphicsView_6">
       <property name="geometry">
        <rect>
         <x>960</x>
-        <y>40</y>
+        <y>30</y>
         <width>461</width>
-        <height>251</height>
+        <height>301</height>
        </rect>
       </property>
      </widget>
@@ -1256,19 +989,6 @@ font: 18pt &quot;MS Outlook&quot;;</string>
        <string>←</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_148">
-      <property name="geometry">
-       <rect>
-        <x>970</x>
-        <y>300</y>
-        <width>441</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica GRANDE de Una cosa con Algo</string>
-      </property>
-     </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
@@ -1310,9 +1030,9 @@ font: 18pt &quot;MS Outlook&quot;;</string>
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>320</y>
+        <y>290</y>
         <width>531</width>
-        <height>341</height>
+        <height>371</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -1325,10 +1045,10 @@ font: 18pt &quot;MS Outlook&quot;;</string>
      <widget class="QLabel" name="label_131">
       <property name="geometry">
        <rect>
-        <x>1230</x>
-        <y>365</y>
+        <x>1220</x>
+        <y>355</y>
         <width>261</width>
-        <height>281</height>
+        <height>301</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -1389,7 +1109,7 @@ font: 18pt &quot;MS Outlook&quot;;</string>
         <x>290</x>
         <y>20</y>
         <width>261</width>
-        <height>281</height>
+        <height>261</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -1405,7 +1125,7 @@ font: 18pt &quot;MS Outlook&quot;;</string>
         <x>20</x>
         <y>20</y>
         <width>261</width>
-        <height>281</height>
+        <height>261</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -1419,9 +1139,9 @@ font: 18pt &quot;MS Outlook&quot;;</string>
       <property name="geometry">
        <rect>
         <x>950</x>
-        <y>365</y>
+        <y>355</y>
         <width>261</width>
-        <height>281</height>
+        <height>301</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -1434,10 +1154,10 @@ font: 18pt &quot;MS Outlook&quot;;</string>
      <widget class="QGraphicsView" name="servicios_graphicsView_8">
       <property name="geometry">
        <rect>
-        <x>1250</x>
-        <y>375</y>
-        <width>220</width>
-        <height>220</height>
+        <x>1229</x>
+        <y>364</y>
+        <width>241</width>
+        <height>281</height>
        </rect>
       </property>
      </widget>
@@ -1461,19 +1181,6 @@ border-radius: 15px;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_137">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>265</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica de Una cosa con Algo</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_138">
       <property name="geometry">
        <rect>
@@ -1487,96 +1194,44 @@ border-radius: 15px;</string>
        <string> Gráfica GRANDE de Una cosa con Algo</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_139">
-      <property name="geometry">
-       <rect>
-        <x>1250</x>
-        <y>610</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica de Una cosa con Algo</string>
-      </property>
-     </widget>
      <widget class="QGraphicsView" name="servicios_graphicsView_5">
       <property name="geometry">
        <rect>
-        <x>590</x>
-        <y>40</y>
-        <width>321</width>
-        <height>581</height>
+        <x>580</x>
+        <y>30</y>
+        <width>341</width>
+        <height>621</height>
        </rect>
       </property>
      </widget>
      <widget class="QGraphicsView" name="servicios_graphicsView_7">
       <property name="geometry">
        <rect>
-        <x>970</x>
-        <y>375</y>
-        <width>220</width>
-        <height>220</height>
+        <x>959</x>
+        <y>364</y>
+        <width>241</width>
+        <height>281</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_140">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>265</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Cantidad de clientes Hombres vs Mujeres</string>
       </property>
      </widget>
      <widget class="QGraphicsView" name="servicios_graphicsView_4">
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>330</y>
+        <y>300</y>
         <width>511</width>
-        <height>291</height>
+        <height>351</height>
        </rect>
       </property>
      </widget>
      <widget class="QGraphicsView" name="servicios_graphicsView_1">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>30</y>
-        <width>220</width>
-        <height>220</height>
+        <x>29</x>
+        <y>29</y>
+        <width>241</width>
+        <height>241</height>
        </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_141">
-      <property name="geometry">
-       <rect>
-        <x>590</x>
-        <y>630</y>
-        <width>321</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica Alargada de Una cosa con Algo</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_142">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>630</y>
-        <width>481</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>     Promedio de servicios hechos por Hombres vs Mujeres</string>
       </property>
      </widget>
      <widget class="QGraphicsView" name="clientes_graphicsView_63">
@@ -1592,10 +1247,10 @@ border-radius: 15px;</string>
      <widget class="QGraphicsView" name="servicios_graphicsView_3">
       <property name="geometry">
        <rect>
-        <x>310</x>
-        <y>30</y>
-        <width>220</width>
-        <height>220</height>
+        <x>299</x>
+        <y>29</y>
+        <width>241</width>
+        <height>241</height>
        </rect>
       </property>
      </widget>
@@ -1603,9 +1258,9 @@ border-radius: 15px;</string>
       <property name="geometry">
        <rect>
         <x>950</x>
-        <y>30</y>
+        <y>20</y>
         <width>481</width>
-        <height>301</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -1615,26 +1270,13 @@ border-radius: 15px;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_144">
-      <property name="geometry">
-       <rect>
-        <x>970</x>
-        <y>610</y>
-        <width>221</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica de Una cosa con Algo</string>
-      </property>
-     </widget>
      <widget class="QGraphicsView" name="servicios_graphicsView_6">
       <property name="geometry">
        <rect>
         <x>960</x>
-        <y>40</y>
+        <y>30</y>
         <width>461</width>
-        <height>251</height>
+        <height>301</height>
        </rect>
       </property>
      </widget>
@@ -1665,19 +1307,6 @@ font: 18pt &quot;MS Outlook&quot;;</string>
       </property>
       <property name="text">
        <string>←</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_149">
-      <property name="geometry">
-       <rect>
-        <x>970</x>
-        <y>300</y>
-        <width>441</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string> Gráfica GRANDE de Una cosa con Algo</string>
       </property>
      </widget>
     </widget>
