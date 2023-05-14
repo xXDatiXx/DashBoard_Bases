@@ -329,7 +329,14 @@ class DashboardScreen(QMainWindow):
         #------------------------
         #clientes_graphicsView_2
         #------------------------
+        #Grafica histplot sobre la edad de los clientes
+        cursor.execute("SELECT FechaNacimineto FROM cliente")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["FechaNacimineto"]
         
+        plt.figure (figsize=(5,5))
+        plt.hist(df["FechaNacimineto"], bins=10, edgecolor="black")
         #download image
         plt.savefig("graficas/clientes2.png")
         #resize image with PIL
@@ -364,21 +371,21 @@ class DashboardScreen(QMainWindow):
         #------------------------
         #clientes_graphicsView_4
         #------------------------
-        #Gráfica de barras Horizontal bar plots
+        #Gráfica de barras Horizontal
         #De los clientes que tengan mas TotalServicios, mostrar los 10 primeros con nombre
-        # cursor.execute("SELECT NombreCliente, ApellidoCLiente, TotalServicios FROM cliente ORDER BY TotalServicios DESC LIMIT 10")
-        # result = cursor.fetchall()
-        # df = pd.DataFrame(result) 
-        # df.columns = ["Nombre", "Apellido", "TotalServicios"] 
-        # df["Nombre"] = df["Nombre"] + " " + df["Apellido"]
-        # df = df.drop(["Apellido"], axis=1) #eliminar columna Apellido 
-        # sns.barplot(x="TotalServicios", y="Nombre", data=df, palette="rocket")
-        # plt.savefig("graficas/clientes4.png")
-        # img = Image.open("graficas/clientes4.png")
-        # img = img.resize((320,580), Image.ANTIALIAS)
-        # img.save("graficas/clientes4.png")
-        # self.clientes_graphicsView_4.setStyleSheet("background-image: url(graficas/clientes4.png);")
-        # plt.close()
+        cursor.execute("SELECT NombreCliente, ApellidoCLiente, TotalServicios FROM cliente ORDER BY TotalServicios DESC LIMIT 10")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result) 
+        df.columns = ["Nombre", "Apellido", "TotalServicios"] 
+        df["Nombre"] = df["Nombre"] + " " + df["Apellido"]
+        df = df.drop(["Apellido"], axis=1) #eliminar columna Apellido 
+        sns.barplot(x="TotalServicios", y="Nombre", data=df, palette="rocket")
+        plt.savefig("graficas/clientes4.png")
+        img = Image.open("graficas/clientes4.png")
+        img = img.resize((320,580), Image.ANTIALIAS)
+        img.save("graficas/clientes4.png")
+        self.clientes_graphicsView_4.setStyleSheet("background-image: url(graficas/clientes4.png);")
+        plt.close()
 
 
 
@@ -431,7 +438,7 @@ def prepareDatabase():
         if(q.prepare("CREATE TABLE IF NOT EXISTS servicio (NombreServicio varchar(50) PRIMARY KEY not null, Costo float, PromedioEntrega varchar(50))")):
             if(q.exec()):
                 print("Tabla servicio creada")
-        if(q.prepare("CREATE TABLE IF NOT EXISTS cliente (idCliente INTEGER PRIMARY KEY AUTOINCREMENT, NombreCliente varchar(50), ApellidoCliente varchar(50), Correo varchar(50), Telefono integer, Sexo varchar(50), FechaNacimineto date, TotalVisitas integer, TotalServicios integer, FechaRegistro date)")):
+        if(q.prepare("CREATE TABLE IF NOT EXISTS cliente (idCliente INTEGER PRIMARY KEY AUTOINCREMENT, NombreCliente varchar(50), ApellidoCliente varchar(50), Correo varchar(50), Telefono integer, Sexo varchar(50), FechaNacimiento date, TotalVisitas integer, TotalServicios integer, FechaRegistro date)")):
             if(q.exec()):
                 print("Tabla cliente creada")
         if(q.prepare("CREATE TABLE IF NOT EXISTS orden (idOrden INTEGER PRIMARY KEY AUTOINCREMENT, idCliente varchar(50), idTenis integer, FechaLlegada date, Costo float, FOREIGN KEY (idCliente) REFERENCES cliente(idCliente), FOREIGN KEY (idTenis) REFERENCES calzado(idTenis))")):
@@ -447,7 +454,8 @@ def prepareDatabase():
     #         con = sql.connect("cleanwalkers.db")
     #         cursor = con.cursor()
     #         if cursor.fetchone() == None:
-    #             instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimineto, TotalVisitas, TotalServicios, FechaRegistro) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}' ,'{row[8]}')")
+    #             instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimiento, TotalVisitas, TotalServicios) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}')")
+
     #             con.execute(instruccion)
     #             con.commit()
     #             con.close()
@@ -473,7 +481,7 @@ def verificarServicios():
         con.close()
 
 #Main
-#prepareDatabase()
+prepareDatabase()
 verificarServicios()
 app = QApplication(sys.argv)
 welcome = DashboardScreen() #WelcomeScreen CAMBIAR
