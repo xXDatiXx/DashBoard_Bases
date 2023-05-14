@@ -330,13 +330,13 @@ class DashboardScreen(QMainWindow):
         #clientes_graphicsView_2
         #------------------------
         #Grafica histplot sobre la edad de los clientes
-        cursor.execute("SELECT FechaNacimineto FROM cliente")
+        cursor.execute("SELECT FechaNacimiento FROM cliente")
         result = cursor.fetchall()
         df = pd.DataFrame(result)
-        df.columns = ["FechaNacimineto"]
-        
+        df.columns = ["FechaNacimiento"]
+
         plt.figure (figsize=(5,5))
-        plt.hist(df["FechaNacimineto"], bins=10, edgecolor="black")
+        plt.hist(df["FechaNacimiento"], bins=10, edgecolor="black")
         #download image
         plt.savefig("graficas/clientes2.png")
         #resize image with PIL
@@ -454,7 +454,7 @@ def prepareDatabase():
     #         con = sql.connect("cleanwalkers.db")
     #         cursor = con.cursor()
     #         if cursor.fetchone() == None:
-    #             instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimiento, TotalVisitas, TotalServicios) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}')")
+    #             instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimiento, TotalVisitas, TotalServicios, FechaRegistro) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}')")
 
     #             con.execute(instruccion)
     #             con.commit()
