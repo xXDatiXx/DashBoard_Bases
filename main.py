@@ -271,7 +271,6 @@ class MainScreen(QMainWindow):
         self.buscarOrden.setQuery("SELECT * FROM orden")
 
 
-
     def buscarNombreCliente(self, txt):
         self.buscarCliente.setQuery("SELECT * FROM cliente WHERE NombreCliente LIKE '%"+txt+"%'")
 
@@ -452,36 +451,36 @@ class DashboardScreen(QMainWindow):
         #calzado_graphicsView_1
         #------------------------
         #grafica pastel sobre el tipo de calzado
-        # cursor.execute("SELECT TipoCalzado, COUNT(*) FROM calzado GROUP BY TipoCalzado")
-        # result = cursor.fetchall()
-        # df = pd.DataFrame(result)
-        # df.columns = ["TipoCalzado", "Total"]
-        # plt.figure (figsize=(5,5))
-        # plt.pie(df["Total"], labels=df["TipoCalzado"], autopct="%1.1f%%", shadow=True, startangle=90)
-        # plt.axis("equal")
-        # plt.savefig("graficas/calzado1.png")
-        # img = Image.open("graficas/calzado1.png")
-        # img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
-        # img.save("graficas/calzado1.png")
-        # self.calzado_graphicsView_1.setStyleSheet("background-image: url(graficas/calzado1.png);")
-        # plt.close()
+        cursor.execute("SELECT TipoCalzado, COUNT(*) FROM calzado GROUP BY TipoCalzado")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["TipoCalzado", "Total"]
+        plt.figure (figsize=(5,5))
+        plt.pie(df["Total"], labels=df["TipoCalzado"], autopct="%1.1f%%", shadow=True, startangle=90)
+        plt.axis("equal")
+        plt.savefig("graficas/calzado1.png")
+        img = Image.open("graficas/calzado1.png")
+        img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
+        img.save("graficas/calzado1.png")
+        self.calzado_graphicsView_1.setStyleSheet("background-image: url(graficas/calzado1.png);")
+        plt.close()
 
         #------------------------
         #calzado_graphicsView_3
         #------------------------
         #grafica de barras, con la marca de calzado y el total de calzado de esa marca
-        # cursor.execute("SELECT Marca, COUNT(*) FROM calzado GROUP BY Marca")   
-        # result = cursor.fetchall()
-        # df = pd.DataFrame(result)
-        # df.columns = ["Marca", "Total"]
-        # plt.figure (figsize=(5,5))
-        # plt.bar(df["Marca"], df["Total"], color=["#FFC300", "#FF5733"])
-        # plt.savefig("graficas/calzado3.png")
-        # img = Image.open("graficas/calzado3.png")
-        # img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
-        # img.save("graficas/calzado3.png")
-        # self.calzado_graphicsView_3.setStyleSheet("background-image: url(graficas/calzado3.png);")
-        # plt.close()
+        cursor.execute("SELECT Marca, COUNT(*) FROM calzado GROUP BY Marca")   
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["Marca", "Total"]
+        plt.figure (figsize=(5,5))
+        plt.bar(df["Marca"], df["Total"], color=["#FFC300", "#FF5733"])
+        plt.savefig("graficas/calzado3.png")
+        img = Image.open("graficas/calzado3.png")
+        img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
+        img.save("graficas/calzado3.png")
+        self.calzado_graphicsView_3.setStyleSheet("background-image: url(graficas/calzado3.png);")
+        plt.close()
 
         self.empleados_graphicsView_1.setStyleSheet("background-image: url(graficas/logo.jpg);")
         self.empleados_graphicsView_3.setStyleSheet("background-image: url(graficas/logo.jpg);")
@@ -535,6 +534,17 @@ def prepareDatabase():
     #         if cursor.fetchone() == None:
     #             instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimiento, TotalVisitas, TotalServicios, FechaRegistro) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}')")
 
+    #             con.execute(instruccion)
+    #             con.commit()
+    #             con.close()
+    #Agregar datos de calzadoF.csv
+    # with open ('csv/calzadoF.csv', errors="ignore") as File:
+    #     reader = csv.reader(File)
+    #     for row in reader:
+    #         con = sql.connect("cleanwalkers.db")
+    #         cursor = con.cursor()
+    #         if cursor.fetchone() == None:
+    #             instruccion = (f"INSERT INTO calzado (TipoCalzado, ServicioContratado, Marca, Talla, Color, Materiales, DetallesCalzado, FechaLlegada, Rack, Extra, Cliente) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}', '{row[9]}', '{row[10]}')")
     #             con.execute(instruccion)
     #             con.commit()
     #             con.close()
