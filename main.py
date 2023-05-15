@@ -527,27 +527,27 @@ def prepareDatabase():
             if(q.exec()):
                 print("Tabla empleado creada")
     #Agregar datos de prueba de clientesCW.csv
-    with open('csv/clientesCW.csv', errors="ignore") as File:
-        reader = csv.reader(File)
-        for row in reader:
-            con = sql.connect("cleanwalkers.db")
-            cursor = con.cursor()
-            if cursor.fetchone() == None:
-                instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimiento, TotalVisitas, TotalServicios, FechaRegistro) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}')")
-                con.execute(instruccion)
-                con.commit()
-                con.close()
+    # with open('csv/clientesCW.csv', errors="ignore") as File:
+    #     reader = csv.reader(File)
+    #     for row in reader:
+    #         con = sql.connect("cleanwalkers.db")
+    #         cursor = con.cursor()
+    #         if cursor.fetchone() == None:
+    #             instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimiento, TotalVisitas, TotalServicios, FechaRegistro) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}')")
+    #             con.execute(instruccion)
+    #             con.commit()
+    #             con.close()
     #Agregar datos de calzadoF.csv
-    with open ('csv/calzadoF.csv', errors="ignore") as File:
-        reader = csv.reader(File)
-        for row in reader:
-            con = sql.connect("cleanwalkers.db")
-            cursor = con.cursor()
-            if cursor.fetchone() == None:
-                instruccion = (f"INSERT INTO calzado (TipoCalzado, ServicioContratado, Marca, Talla, Color, Materiales, DetallesCalzado, FechaLlegada, Rack, Extra, Cliente) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}', '{row[9]}', '{row[10]}')")
-                con.execute(instruccion)
-                con.commit()
-                con.close()
+    # with open ('csv/calzadoF.csv', errors="ignore") as File:
+    #     reader = csv.reader(File)
+    #     for row in reader:
+    #         con = sql.connect("cleanwalkers.db")
+    #         cursor = con.cursor()
+    #         if cursor.fetchone() == None:
+    #             instruccion = (f"INSERT INTO calzado (TipoCalzado, ServicioContratado, Marca, Talla, Color, Materiales, DetallesCalzado, FechaLlegada, Rack, Extra, Cliente) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}', '{row[9]}', '{row[10]}')")
+    #             con.execute(instruccion)
+    #             con.commit()
+    #             con.close()
   
 def verificarServicios():
     con = sql.connect("cleanwalkers.db")
