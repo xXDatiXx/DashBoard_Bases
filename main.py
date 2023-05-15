@@ -510,7 +510,8 @@ def prepareDatabase():
     db.setDatabaseName("cleanwalkers.db")
     if(db.open()):
         q = QSqlQuery()
-        if(q.prepare("CREATE TABLE IF NOT EXISTS calzado (idTenis INTEGER PRIMARY KEY AUTOINCREMENT, TipoCalzado varchar(50), ServicioContratado varchar(50), Marca varchar(50), Talla float, Color varchar(50), Materiales varchar(50), DetallesCalzado varchar(50), FechaLlegada date, Rack integer, Extra varchar(50), Cliente varchar(50), FOREIGN KEY (Cliente) REFERENCES cliente(NombreCliente))")):
+        #crear tabla calzado
+        if(q.prepare("CREATE TABLE IF NOT EXISTS calzado (idTenis INTEGER PRIMARY KEY AUTOINCREMENT, TipoCalzado varchar(50), ServicioContratado varchar(50), Marca varchar(50), Talla float, Color varchar(50), Materiales varchar(50), DetallesCalzado varchar(50), FechaLlegada date, Rack integer, Extra varchar(50), Cliente varchar(50))")):
             if(q.exec()):
                 print("Tabla calzado creada")
         if(q.prepare("CREATE TABLE IF NOT EXISTS servicio (NombreServicio varchar(50) PRIMARY KEY not null, Costo float, PromedioEntrega varchar(50))")):
@@ -526,28 +527,27 @@ def prepareDatabase():
             if(q.exec()):
                 print("Tabla empleado creada")
     #Agregar datos de prueba de clientesCW.csv
-    # with open('csv/clientesCW.csv', errors="ignore") as File:
-    #     reader = csv.reader(File)
-    #     for row in reader:
-    #         con = sql.connect("cleanwalkers.db")
-    #         cursor = con.cursor()
-    #         if cursor.fetchone() == None:
-    #             instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimiento, TotalVisitas, TotalServicios, FechaRegistro) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}')")
-
-    #             con.execute(instruccion)
-    #             con.commit()
-    #             con.close()
+    with open('csv/clientesCW.csv', errors="ignore") as File:
+        reader = csv.reader(File)
+        for row in reader:
+            con = sql.connect("cleanwalkers.db")
+            cursor = con.cursor()
+            if cursor.fetchone() == None:
+                instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimiento, TotalVisitas, TotalServicios, FechaRegistro) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}')")
+                con.execute(instruccion)
+                con.commit()
+                con.close()
     #Agregar datos de calzadoF.csv
-    # with open ('csv/calzadoF.csv', errors="ignore") as File:
-    #     reader = csv.reader(File)
-    #     for row in reader:
-    #         con = sql.connect("cleanwalkers.db")
-    #         cursor = con.cursor()
-    #         if cursor.fetchone() == None:
-    #             instruccion = (f"INSERT INTO calzado (TipoCalzado, ServicioContratado, Marca, Talla, Color, Materiales, DetallesCalzado, FechaLlegada, Rack, Extra, Cliente) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}', '{row[9]}', '{row[10]}')")
-    #             con.execute(instruccion)
-    #             con.commit()
-    #             con.close()
+    with open ('csv/calzadoF.csv', errors="ignore") as File:
+        reader = csv.reader(File)
+        for row in reader:
+            con = sql.connect("cleanwalkers.db")
+            cursor = con.cursor()
+            if cursor.fetchone() == None:
+                instruccion = (f"INSERT INTO calzado (TipoCalzado, ServicioContratado, Marca, Talla, Color, Materiales, DetallesCalzado, FechaLlegada, Rack, Extra, Cliente) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}', '{row[9]}', '{row[10]}')")
+                con.execute(instruccion)
+                con.commit()
+                con.close()
   
 def verificarServicios():
     con = sql.connect("cleanwalkers.db")
@@ -570,7 +570,7 @@ def verificarServicios():
         con.close()
 
 #Main
-#prepareDatabase()
+prepareDatabase()
 verificarServicios()
 app = QApplication(sys.argv)
 welcome = DashboardScreen() #WelcomeScreen CAMBIAR
