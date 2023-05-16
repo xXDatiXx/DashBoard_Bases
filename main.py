@@ -316,7 +316,7 @@ class DashboardScreen(QMainWindow):
         df.columns = ["Sexo", "Total"]
         plt.figure (figsize=(4,4))
         plt.title("Sexo de los clientes")
-        plt.pie(df["Total"], labels=df["Sexo"], autopct="%1.1f%%", shadow=True, startangle=90, colors=["#F2C94C", "#0f3463"])
+        plt.pie(df["Total"], labels=df["Sexo"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#F2C94C", "#0f3463"])
         plt.axis("equal")
         #download image
         plt.savefig("graficas/clientes1.png")
@@ -460,9 +460,9 @@ class DashboardScreen(QMainWindow):
         result = cursor.fetchall()
         df = pd.DataFrame(result)
         df.columns = ["TipoCalzado", "Total"]
-        plt.figure (figsize=(5,5))
+        plt.figure (figsize=(4,4))
         plt.title("Tipos de Calzado")
-        plt.pie(df["Total"], labels=df["TipoCalzado"], autopct="%1.1f%%", shadow=True, startangle=90)
+        plt.pie(df["Total"], labels=df["TipoCalzado"], autopct="%1.1f%%", shadow=False, startangle=90)
         plt.axis("equal")
         plt.savefig("graficas/calzado1.png")
         img = Image.open("graficas/calzado1.png")
@@ -512,9 +512,9 @@ class DashboardScreen(QMainWindow):
         result = cursor.fetchall()
         df = pd.DataFrame(result)
         df.columns = ["ServicioContratado", "Total"]
-        plt.figure (figsize=(5,5))
+        plt.figure (figsize=(4,4))
         plt.title("Servicios contratados")
-        plt.pie(df["Total"], labels=df["ServicioContratado"], autopct="%1.1f%%", shadow=True, startangle=90)
+        plt.pie(df["Total"], labels=df["ServicioContratado"], autopct="%1.1f%%", shadow=False, startangle=90)
         plt.axis("equal")
         plt.savefig("graficas/calzado7.png")
         img = Image.open("graficas/calzado7.png")
