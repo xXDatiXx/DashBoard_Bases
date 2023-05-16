@@ -65,7 +65,7 @@
 border-radius:10px;</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab_6">
      <attribute name="title">
@@ -210,10 +210,10 @@ border-radius:10px;</string>
      <widget class="QLabel" name="label_12">
       <property name="geometry">
        <rect>
-        <x>950</x>
-        <y>355</y>
+        <x>945</x>
+        <y>390</y>
         <width>261</width>
-        <height>301</height>
+        <height>271</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -227,9 +227,9 @@ border-radius:10px;</string>
       <property name="geometry">
        <rect>
         <x>1220</x>
-        <y>355</y>
+        <y>390</y>
         <width>261</width>
-        <height>301</height>
+        <height>271</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -245,7 +245,7 @@ border-radius:10px;</string>
         <x>1440</x>
         <y>20</y>
         <width>51</width>
-        <height>321</height>
+        <height>351</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -262,20 +262,20 @@ border-radius: 15px;</string>
      <widget class="QGraphicsView" name="clientes_graphicsView_5">
       <property name="geometry">
        <rect>
-        <x>960</x>
-        <y>360</y>
-        <width>240</width>
-        <height>291</height>
+        <x>950</x>
+        <y>400</y>
+        <width>250</width>
+        <height>250</height>
        </rect>
       </property>
      </widget>
      <widget class="QGraphicsView" name="clientes_graphicsView_6">
       <property name="geometry">
        <rect>
-        <x>1230</x>
-        <y>360</y>
-        <width>240</width>
-        <height>291</height>
+        <x>1225</x>
+        <y>400</y>
+        <width>250</width>
+        <height>250</height>
        </rect>
       </property>
      </widget>
@@ -285,7 +285,7 @@ border-radius: 15px;</string>
         <x>950</x>
         <y>20</y>
         <width>481</width>
-        <height>321</height>
+        <height>351</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -301,7 +301,7 @@ border-radius: 15px;</string>
         <x>960</x>
         <y>30</y>
         <width>461</width>
-        <height>301</height>
+        <height>331</height>
        </rect>
       </property>
      </widget>
@@ -393,9 +393,9 @@ font: 18pt &quot;MS Outlook&quot;;</string>
       <property name="geometry">
        <rect>
         <x>1220</x>
-        <y>355</y>
+        <y>390</y>
         <width>261</width>
-        <height>301</height>
+        <height>271</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -485,10 +485,10 @@ font: 18pt &quot;MS Outlook&quot;;</string>
      <widget class="QLabel" name="label_105">
       <property name="geometry">
        <rect>
-        <x>950</x>
-        <y>355</y>
+        <x>945</x>
+        <y>390</y>
         <width>261</width>
-        <height>301</height>
+        <height>271</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -501,10 +501,10 @@ font: 18pt &quot;MS Outlook&quot;;</string>
      <widget class="QGraphicsView" name="calzado_graphicsView_8">
       <property name="geometry">
        <rect>
-        <x>1230</x>
-        <y>360</y>
-        <width>241</width>
-        <height>291</height>
+        <x>1225</x>
+        <y>400</y>
+        <width>250</width>
+        <height>250</height>
        </rect>
       </property>
      </widget>
@@ -514,7 +514,7 @@ font: 18pt &quot;MS Outlook&quot;;</string>
         <x>1440</x>
         <y>20</y>
         <width>51</width>
-        <height>321</height>
+        <height>351</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -554,10 +554,10 @@ border-radius: 15px;</string>
      <widget class="QGraphicsView" name="calzado_graphicsView_7">
       <property name="geometry">
        <rect>
-        <x>959</x>
-        <y>360</y>
-        <width>241</width>
-        <height>291</height>
+        <x>950</x>
+        <y>400</y>
+        <width>250</width>
+        <height>250</height>
        </rect>
       </property>
      </widget>
@@ -607,7 +607,7 @@ border-radius: 15px;</string>
         <x>950</x>
         <y>20</y>
         <width>481</width>
-        <height>321</height>
+        <height>351</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -623,7 +623,7 @@ border-radius: 15px;</string>
         <x>960</x>
         <y>30</y>
         <width>461</width>
-        <height>301</height>
+        <height>331</height>
        </rect>
       </property>
      </widget>
@@ -1314,7 +1314,7 @@ font: 18pt &quot;MS Outlook&quot;;</string>
      <x>0</x>
      <y>0</y>
      <width>1500</width>
-     <height>18</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

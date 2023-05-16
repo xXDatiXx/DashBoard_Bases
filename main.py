@@ -297,6 +297,9 @@ class DashboardScreen(QMainWindow):
         self.regresarButton_12.clicked.connect(self.gotoMain)
         self.regresarButton_13.clicked.connect(self.gotoMain)
         resizePequeño = 240
+        resizePequeño2 = 250
+        resizeGrande1 = 511
+        resizeGrande2 = 351
 
         #Leer consulta de la base de datos
         con = sql.connect("cleanwalkers.db")
@@ -441,12 +444,14 @@ class DashboardScreen(QMainWindow):
         #Gráfica de barras
 
 
+        self.calzado_graphicsView_3.setStyleSheet("background-image: url(graficas/logo.jpg);")
         self.calzado_graphicsView_4.setStyleSheet("background-image: url(graficas/logo.jpg);")
         #scatter plot, fechaLlegada vs calzado en ese día
         self.calzado_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
         self.calzado_graphicsView_6.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        self.calzado_graphicsView_7.setStyleSheet("background-image: url(graficas/logo.jpg);")
         self.calzado_graphicsView_8.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        
+
         #------------------------
         #calzado_graphicsView_1
         #------------------------
@@ -456,6 +461,7 @@ class DashboardScreen(QMainWindow):
         df = pd.DataFrame(result)
         df.columns = ["TipoCalzado", "Total"]
         plt.figure (figsize=(5,5))
+        plt.title("Tipos de Calzado")
         plt.pie(df["Total"], labels=df["TipoCalzado"], autopct="%1.1f%%", shadow=True, startangle=90)
         plt.axis("equal")
         plt.savefig("graficas/calzado1.png")
@@ -466,21 +472,59 @@ class DashboardScreen(QMainWindow):
         plt.close()
 
         #------------------------
-        #calzado_graphicsView_3
+        #calzado_graphicsView_4
         #------------------------
         #grafica de barras, con la marca de calzado y el total de calzado de esa marca
-        cursor.execute("SELECT Marca, COUNT(*) FROM calzado GROUP BY Marca")   
+        # cursor.execute("SELECT Marca, COUNT(*) FROM calzado GROUP BY Marca")
+        # result = cursor.fetchall()
+        # df = pd.DataFrame(result)
+        # df.columns = ["Marca", "Total"]
+        # plt.figure (figsize=(5,5))
+        # plt.title("Marcas de los calzados")
+        # plt.bar(df["Marca"], df["Total"], color=["#FFC300", "#FF5733"])
+        # plt.savefig("graficas/calzado4.png")
+        # img = Image.open("graficas/calzado4.png")
+        # img = img.resize((resizeGrande1,resizeGrande2), Image.ANTIALIAS)
+        # img.save("graficas/calzado4.png")
+        # #self.calzado_graphicsView_4.setStyleSheet("background-image: url(graficas/calzado4.png);")
+        # plt.close()
+        cursor.execute("SELECT Marca, COUNT(*) AS CNT FROM calzado GROUP BY Marca")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result) 
+        df.columns = ["Marca", "Total"] 
+        #inclinar los nombres
+        plt.yticks(rotation=45)
+        plt.title("Servicios por Marca")
+        sns.barplot(x="Total", y="Marca", data=df, palette="cividis")
+        plt.savefig("graficas/calzado4.png")
+        img = Image.open("graficas/calzado4.png")
+        img = img.resize((resizeGrande1,resizeGrande2), Image.ANTIALIAS)
+        img.save("graficas/calzado4.png")
+        self.calzado_graphicsView_4.setStyleSheet("background-image: url(graficas/calzado4.png);")
+        plt.close()
+
+
+        #------------------------
+        #calzado_graphicsView_7
+        #------------------------
+        #grafica pastel sobre el tipo de calzado
+        cursor.execute("SELECT ServicioContratado, COUNT(*) FROM calzado GROUP BY ServicioContratado")
         result = cursor.fetchall()
         df = pd.DataFrame(result)
-        df.columns = ["Marca", "Total"]
+        df.columns = ["ServicioContratado", "Total"]
         plt.figure (figsize=(5,5))
-        plt.bar(df["Marca"], df["Total"], color=["#FFC300", "#FF5733"])
-        plt.savefig("graficas/calzado3.png")
-        img = Image.open("graficas/calzado3.png")
-        img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
-        img.save("graficas/calzado3.png")
-        self.calzado_graphicsView_3.setStyleSheet("background-image: url(graficas/calzado3.png);")
+        plt.title("Servicios contratados")
+        plt.pie(df["Total"], labels=df["ServicioContratado"], autopct="%1.1f%%", shadow=True, startangle=90)
+        plt.axis("equal")
+        plt.savefig("graficas/calzado7.png")
+        img = Image.open("graficas/calzado7.png")
+        img = img.resize((resizePequeño2,resizePequeño2), Image.ANTIALIAS)
+        img.save("graficas/calzado7.png")
+        self.calzado_graphicsView_7.setStyleSheet("background-image: url(graficas/calzado7.png);")
         plt.close()
+
+        
+
 
         self.empleados_graphicsView_1.setStyleSheet("background-image: url(graficas/logo.jpg);")
         self.empleados_graphicsView_3.setStyleSheet("background-image: url(graficas/logo.jpg);")
