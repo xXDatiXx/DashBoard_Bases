@@ -591,7 +591,26 @@ class DashboardScreen(QMainWindow):
 
         self.empleados_graphicsView_1.setStyleSheet("background-image: url(graficas/logo.jpg);")
         self.empleados_graphicsView_3.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        self.empleados_graphicsView_4.setStyleSheet("background-image: url(graficas/logo.jpg);")
+
+        #------------------------
+        #empleados_graphicsView_4
+        #------------------------
+        #Gráfica de barras el total de tenis lavados de la tabla empleados
+        cursor.execute("SELECT NombreEmpleado, TenisLavados FROM empleado")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["Nombre", "Total"]
+        plt.figure (figsize=(4,4))
+        plt.title("Tenis lavados por empleado")
+        plt.xticks(rotation = 45)
+        sns.barplot(x="Nombre", y="Total", data=df, palette="cividis")
+        
+        plt.savefig("graficas/empleados4.png")  
+        img = Image.open("graficas/empleados4.png")
+        img = img.resize((resizeGrande1,resizeGrande2), Image.ANTIALIAS)
+        img.save("graficas/empleados4.png")
+        self.empleados_graphicsView_4.setStyleSheet("background-image: url(graficas/empleados4.png);")
+
         self.empleados_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
         self.empleados_graphicsView_6.setStyleSheet("background-image: url(graficas/logo.jpg);")
         self.empleados_graphicsView_7.setStyleSheet("background-image: url(graficas/logo.jpg);")
@@ -630,10 +649,10 @@ def prepareDatabase():
         if(q.prepare("CREATE TABLE IF NOT EXISTS orden (idOrden INTEGER PRIMARY KEY AUTOINCREMENT, idCliente varchar(50), idTenis integer, FechaLlegada date, Costo float, FOREIGN KEY (idCliente) REFERENCES cliente(idCliente), FOREIGN KEY (idTenis) REFERENCES calzado(idTenis))")):
             if(q.exec()):
                 print("Tabla orden creada")
-        if(q.prepare("CREATE TABLE IF NOT EXISTS empleado (idEmpleado INTEGER PRIMARY KEY AUTOINCREMENT, NombreEmpleado varchar(50), ApellidoEmpleado varchar(50), Telefono integer, Correo varchar(50), idTenisLavados integer)")):
+        if(q.prepare("CREATE TABLE IF NOT EXISTS empleado (idEmpleado INTEGER PRIMARY KEY AUTOINCREMENT, NombreEmpleado varchar(50), ApellidoEmpleado varchar(50), Telefono integer, Correo varchar(50), TenisLavados integer)")):
             if(q.exec()):
                 print("Tabla empleado creada")
-    #Agregar datos de prueba de clientesCW.csv
+    # #Agregar datos de prueba de clientesCW.csv
     # with open('csv/clientesCW.csv', errors="ignore") as File:
     #     reader = csv.reader(File)
     #     for row in reader:
@@ -644,7 +663,7 @@ def prepareDatabase():
     #             con.execute(instruccion)
     #             con.commit()
     #             con.close()
-    #Agregar datos de calzadoF.csv
+    # #Agregar datos de calzadoF.csv
     # with open ('csv/calzadoF.csv', errors="ignore") as File:
     #     reader = csv.reader(File)
     #     for row in reader:
@@ -652,6 +671,17 @@ def prepareDatabase():
     #         cursor = con.cursor()
     #         if cursor.fetchone() == None:
     #             instruccion = (f"INSERT INTO calzado (TipoCalzado, ServicioContratado, Marca, Talla, Color, Materiales, DetallesCalzado, FechaLlegada, Rack, Extra, Cliente) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}', '{row[9]}', '{row[10]}')")
+    #             con.execute(instruccion)
+    #             con.commit()
+    #             con.close()
+    # #Agregar datos de empleado.csv
+    # with open ('csv/empleado.csv', errors="ignore") as File:
+    #     reader = csv.reader(File)
+    #     for row in reader:
+    #         con = sql.connect("cleanwalkers.db")
+    #         cursor = con.cursor()
+    #         if cursor.fetchone() == None:
+    #             instruccion = (f"INSERT INTO empleado (NombreEmpleado, ApellidoEmpleado, Telefono, Correo, TenisLavados) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}')")
     #             con.execute(instruccion)
     #             con.commit()
     #             con.close()
