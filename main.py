@@ -7,10 +7,12 @@ from PyQt6.QtCore import *
 from PyQt6.QtGui import *
 import sqlite3 as sql
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
+from PIL import Image
 import csv
 import datetime
+import random
 
 #Clase Ventana Loginaaaa
 class WelcomeScreen(QMainWindow):
@@ -269,7 +271,6 @@ class MainScreen(QMainWindow):
         self.buscarOrden.setQuery("SELECT * FROM orden")
 
 
-
     def buscarNombreCliente(self, txt):
         self.buscarCliente.setQuery("SELECT * FROM cliente WHERE NombreCliente LIKE '%"+txt+"%'")
 
@@ -292,21 +293,337 @@ class DashboardScreen(QMainWindow):
         super(DashboardScreen, self).__init__()
         loadUi("dashboard.ui", self)
         self.regresarButton.clicked.connect(self.gotoMain)
-
-        #Agregar imagen de fondo al graphicview
-        self.calzado_graphicsView.setStyleSheet("background-image: url(logo.png);")
-        self.client_graphicsView.setStyleSheet("background-image: url(logo.png);")
-        self.empleados_graphicsView.setStyleSheet("background-image: url(logo.png);")
-        self.servicios_graphicsView.setStyleSheet("background-image: url(logo.png);")
-        self.otros_graphicsView_1.setStyleSheet("background-image: url(logo.png);")
-        self.otros_graphicsView_2.setStyleSheet("background-image: url(logo.png);")
-        self.otros_graphicsView_3.setStyleSheet("background-image: url(logo.png);")
-        self.otros_graphicsView_4.setStyleSheet("background-image: url(logo.png);")
-        self.otros_graphicsView_5.setStyleSheet("background-image: url(logo.png);")
-        self.otros_graphicsView_6.setStyleSheet("background-image: url(logo.png);")
-        self.otros_graphicsView_7.setStyleSheet("background-image: url(logo.png);")
+        self.regresarButton_11.clicked.connect(self.gotoMain)
+        self.regresarButton_12.clicked.connect(self.gotoMain)
+        self.regresarButton_13.clicked.connect(self.gotoMain)
+        resizePequeño = 240
+        resizePequeño2 = 250
+        resizeGrande1 = 511
+        resizeGrande2 = 351
+        resizeGrande3 = 461
+        resizeGrande4 = 330
 
 
+        #Leer consulta de la base de datos
+        con = sql.connect("cleanwalkers.db")
+        cursor = con.cursor()
+
+
+        #------------------------
+        #clientes_graphicsView_1
+        #------------------------
+        #grafica de pastel, sobre el sexo de los clientes
+        cursor.execute("SELECT Sexo, COUNT(*) FROM cliente GROUP BY Sexo")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["Sexo", "Total"]
+        plt.figure (figsize=(4,4))
+        plt.title("Sexo de los clientes")
+        plt.pie(df["Total"], labels=df["Sexo"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#F2C94C", "#0f3463"])
+        plt.axis("equal")
+        #download image
+        plt.savefig("graficas/clientes1.png")
+        #resize image with PIL
+        img = Image.open("graficas/clientes1.png")
+        img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
+        img.save("graficas/clientes1.png")
+        self.clientes_graphicsView_1.setStyleSheet("background-image: url(graficas/clientes1.png);")
+        #limpiar variables
+        plt.close()
+
+        #------------------------
+        #clientes_graphicsView_2
+        #------------------------
+        #Grafica histplot sobre la edad de los clientes
+        cursor.execute("SELECT FechaNacimiento FROM cliente")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["FechaNacimiento"]
+        #Formato de fecha en db es dd/mm/yyyy
+        #Se convierte a yyyy
+        df["FechaNacimiento"] = df["FechaNacimiento"].str.slice(start=6)
+        df["FechaNacimiento"] = df["FechaNacimiento"].astype(int)
+        df["FechaNacimiento"] = 2023 - df["FechaNacimiento"]
+        #Verificar que no haya edades menores a 10 ni mayores a 100 años y si hay ponerlos entre 10 y 50
+        for i in range(len(df["FechaNacimiento"])):
+            if df["FechaNacimiento"][i] < 10 or df["FechaNacimiento"][i] > 100:
+                df["FechaNacimiento"][i] = random.randint(10,50)
+        
+        plt.figure (figsize=(4,4))
+        plt.title("Número de clientes por edad")
+        plt.ylabel("Total")
+        plt.xlabel("Edad")
+        plt.hist(df["FechaNacimiento"], bins=10, color="#F2C94C")
+        #download image
+        plt.savefig("graficas/clientes2.png")
+        #resize image with PIL
+        img = Image.open("graficas/clientes2.png")
+        img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
+        img.save("graficas/clientes2.png")
+        self.clientes_graphicsView_2.setStyleSheet("background-image: url(graficas/clientes2.png);")
+        #limpiar variables
+        plt.close()
+
+        #------------------------
+        #clientes_graphicsView_3
+        #------------------------
+        #grafica de barras, promedio de servicios por sexo
+        cursor.execute("SELECT Sexo, AVG(TotalServicios) FROM cliente GROUP BY Sexo")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["Sexo", "Promedio"]
+        plt.figure (figsize=(5,5))
+        plt.title("Promedio de servicios por sexo")
+        plt.bar(df["Sexo"], df["Promedio"], color=["#F2C94C", "#0f3463"])
+        #download image
+        plt.savefig("graficas/clientes3.png")
+        #resize image with PIL
+        img = Image.open("graficas/clientes3.png")
+        img = img.resize((511,351), Image.ANTIALIAS)
+        img.save("graficas/clientes3.png")
+        self.clientes_graphicsView_3.setStyleSheet("background-image: url(graficas/clientes3.png);")
+        #limpiar variables
+        plt.close()
+
+        #------------------------
+        #clientes_graphicsView_4
+        #------------------------
+        #Gráfica de barras Horizontal
+        #De los clientes que tengan mas TotalServicios, mostrar los 10 primeros con nombre
+        cursor.execute("SELECT NombreCliente, ApellidoCLiente, TotalServicios FROM cliente ORDER BY TotalServicios DESC LIMIT 10")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result) 
+        df.columns = ["Nombre", "Apellido", "TotalServicios"] 
+        df["Nombre"] = df["Nombre"] + " " + df["Apellido"]
+        df = df.drop(["Apellido"], axis=1) #eliminar columna Apellido 
+        #inclinar los nombres
+        plt.yticks(rotation=45)
+        plt.title("Clientes con mas servicios")
+        sns.barplot(x="TotalServicios", y="Nombre", data=df, palette="cividis")
+        plt.savefig("graficas/clientes4.png")
+        img = Image.open("graficas/clientes4.png")
+        img = img.resize((341,621), Image.ANTIALIAS)
+        img.save("graficas/clientes4.png")
+        self.clientes_graphicsView_4.setStyleSheet("background-image: url(graficas/clientes4.png);")
+        plt.close()
+
+        #------------------------
+        #clientes_graphicsView_5
+        #------------------------
+        #Lineplot de la fechaRegistro de los clientes
+        # cursor.execute("SELECT FechaRegistro FROM cliente")
+        # result = cursor.fetchall()
+        # df = pd.DataFrame(result)
+        # df.columns = ["FechaRegistro"]
+        # #Formato de fecha en db es dd/mm/yyyy
+        # #Se convierte a mm
+        # df["FechaRegistro"] = df["FechaRegistro"].str.slice(start=3, stop=5)
+        # df["FechaRegistro"] = df["FechaRegistro"].astype(int)
+        # df["FechaRegistro"] = df["FechaRegistro"].replace([1,2,3,4,5,6,7,8,9,10,11,12], ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto","Septiembre", "Octubre", "Noviembre", "Diciembre"])
+
+        # plt.figure (figsize=(4,4))
+        # plt.title("Fecha de registro de los clientes")
+        # plt.ylabel("Total")
+        # plt.xlabel("Fecha")
+        # plt.plot(df["FechaRegistro"], color="#F2C94C")
+        # #download image
+        # plt.savefig("graficas/clientes5.png")
+        # #resize image with PIL
+        # img = Image.open("graficas/clientes5.png")
+        # img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
+        # img.save("graficas/clientes5.png")
+        # self.clientes_graphicsView_5.setStyleSheet("background-image: url(graficas/clientes5.png);")
+        # #limpiar variables
+        # plt.close()
+
+
+        #------------------------
+        #clientes_graphicsView_6
+        #------------------------
+        #Promedio de TotalServicios según sus visitasdel cliente
+
+        #------------------------
+        #clientes_graphicsView_7
+        #------------------------
+        #Gráfica de barras
+
+
+        
+        self.calzado_graphicsView_4.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        #scatter plot, fechaLlegada vs calzado en ese día
+        self.calzado_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        self.calzado_graphicsView_6.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        self.calzado_graphicsView_8.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        
+
+        #------------------------
+        #calzado_graphicsView_1
+        #------------------------
+        #grafica pastel sobre el tipo de calzado
+        cursor.execute("SELECT TipoCalzado, COUNT(*) FROM calzado GROUP BY TipoCalzado")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["TipoCalzado", "Total"]
+        plt.figure (figsize=(4,4))
+        plt.title("Tipos de Calzado")
+        plt.pie(df["Total"], labels=df["TipoCalzado"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#BAA050", "#0a17ad", "#FABC00", "#0a17ad", "#FABC00"])
+        plt.axis("equal")
+        plt.savefig("graficas/calzado1.png")
+        img = Image.open("graficas/calzado1.png")
+        img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
+        img.save("graficas/calzado1.png")
+        self.calzado_graphicsView_1.setStyleSheet("background-image: url(graficas/calzado1.png);")
+        plt.close()
+
+        #------------------------
+        #calzado_graphicsView_3
+        #------------------------
+        #grafica pastel sobre los materiales del calzado
+        cursor.execute("SELECT Materiales, COUNT(*) FROM calzado GROUP BY Materiales")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["Materiales", "Total"]
+        plt.figure (figsize=(4,4))
+        plt.title("Materiales del Calzado")
+        plt.pie(df["Total"], labels=df["Materiales"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#FABC00", "#0a17ad", "#FABC00", "#0a17ad", "#FABC00", "#0a17ad", "#BAA050"])
+        plt.axis("equal")
+        plt.savefig("graficas/calzado3.png")
+        img = Image.open("graficas/calzado3.png")
+        img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
+        img.save("graficas/calzado3.png")
+        self.calzado_graphicsView_3.setStyleSheet("background-image: url(graficas/calzado3.png);")
+        plt.close()
+
+        #------------------------
+        #calzado_graphicsView_4
+        #------------------------
+        #grafica de barras, con la marca de calzado y el total de calzado de esa marca
+        # cursor.execute("SELECT Marca, COUNT(*) FROM calzado GROUP BY Marca")
+        # result = cursor.fetchall()
+        # df = pd.DataFrame(result)
+        # df.columns = ["Marca", "Total"]
+        # plt.figure (figsize=(5,5))
+        # plt.title("Marcas de los calzados")
+        # plt.bar(df["Marca"], df["Total"], color=["#FFC300", "#FF5733"])
+        # plt.savefig("graficas/calzado4.png")
+        # img = Image.open("graficas/calzado4.png")
+        # img = img.resize((resizeGrande1,resizeGrande2), Image.ANTIALIAS)
+        # img.save("graficas/calzado4.png")
+        # #self.calzado_graphicsView_4.setStyleSheet("background-image: url(graficas/calzado4.png);")
+        # plt.close()
+        cursor.execute("SELECT Marca, COUNT(*) AS CNT FROM calzado GROUP BY Marca")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result) 
+        df.columns = ["Marca", "Total"] 
+        #inclinar los nombres
+        plt.yticks(rotation=45)
+        plt.title("Servicios por Marca")
+        sns.barplot(x="Total", y="Marca", data=df, palette="cividis")
+        plt.savefig("graficas/calzado4.png")
+        img = Image.open("graficas/calzado4.png")
+        img = img.resize((resizeGrande1,resizeGrande2), Image.ANTIALIAS)
+        img.save("graficas/calzado4.png")
+        self.calzado_graphicsView_4.setStyleSheet("background-image: url(graficas/calzado4.png);")
+        plt.close()
+
+
+        #------------------------
+        #calzado_graphicsView_6
+        #------------------------
+        # grafica de barras, con la marca de calzado y el total de calzado de esa marca
+        cursor.execute("SELECT Talla, COUNT(*) FROM calzado GROUP BY Talla")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result) 
+        df.columns = ["Total", "Talla"] 
+        #inclinar los nombres
+        plt.yticks(rotation=0)
+        plt.xticks(rotation = 45)
+        plt.title("Tallas usuales")
+        sns.barplot(x="Total", y="Talla", data=df, palette="cividis")
+        plt.savefig("graficas/calzado6.png")
+        img = Image.open("graficas/calzado6.png")
+        img = img.resize((resizeGrande3,resizeGrande4), Image.ANTIALIAS)
+        img.save("graficas/calzado6.png")
+        self.calzado_graphicsView_6.setStyleSheet("background-image: url(graficas/calzado6.png);")
+        plt.close()
+
+        #------------------------
+        #calzado_graphicsView_7
+        #------------------------
+        #grafica pastel sobre el tipo de calzado
+        cursor.execute("SELECT ServicioContratado, COUNT(*) FROM calzado GROUP BY ServicioContratado")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["ServicioContratado", "Total"]
+        plt.figure (figsize=(4,4))
+        plt.title("Servicios contratados")
+        plt.pie(df["Total"], labels=df["ServicioContratado"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#FABC00", "#0a17ad", "#FABC00", "#0a17ad", "#FABC00", "#0a17ad"])
+        plt.axis("equal")
+        plt.savefig("graficas/calzado7.png")
+        img = Image.open("graficas/calzado7.png")
+        img = img.resize((resizePequeño2,resizePequeño2), Image.ANTIALIAS)
+        img.save("graficas/calzado7.png")
+        self.calzado_graphicsView_7.setStyleSheet("background-image: url(graficas/calzado7.png);")
+        plt.close()
+
+        #------------------------
+        #calzado_graphicsView_8
+        #------------------------
+        #grafica pastel sobre el tipo de calzado
+        # cursor.execute("SELECT ServicioContratado, COUNT(*) FROM calzado GROUP BY ServicioContratado")
+        # result = cursor.fetchall()
+        # df = pd.DataFrame(result)
+        # df.columns = ["ServicioContratado", "Total"]
+
+        # plt.figure (figsize=(5,5))
+        # plt.title("Servicios contratados")
+        # plt.pie(df["Total"], labels=df["ServicioContratado"], autopct="%1.1f%%", shadow=True, startangle=90)
+        # plt.axis("equal")
+        # plt.savefig("graficas/calzado8.png")
+        # img = Image.open("graficas/calzado8.png")
+        # img = img.resize((resizePequeño2,resizePequeño2), Image.ANTIALIAS)
+        # img.save("graficas/calzado8.png")
+        # self.calzado_graphicsView_8.setStyleSheet("background-image: url(graficas/calzado8.png);")
+        # plt.close()
+
+        
+
+
+        self.empleados_graphicsView_1.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        self.empleados_graphicsView_3.setStyleSheet("background-image: url(graficas/logo.jpg);")
+
+        #------------------------
+        #empleados_graphicsView_4
+        #------------------------
+        #Gráfica de barras el total de tenis lavados de la tabla empleados
+        cursor.execute("SELECT NombreEmpleado, TenisLavados FROM empleado")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["Nombre", "Total"]
+        plt.figure (figsize=(4,4))
+        plt.title("Tenis lavados por empleado")
+        plt.xticks(rotation = 45)
+        sns.barplot(x="Nombre", y="Total", data=df, palette="cividis")
+        
+        plt.savefig("graficas/empleados4.png")  
+        img = Image.open("graficas/empleados4.png")
+        img = img.resize((resizeGrande1,resizeGrande2), Image.ANTIALIAS)
+        img.save("graficas/empleados4.png")
+        self.empleados_graphicsView_4.setStyleSheet("background-image: url(graficas/empleados4.png);")
+
+        self.empleados_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        self.empleados_graphicsView_6.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        self.empleados_graphicsView_7.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        self.empleados_graphicsView_8.setStyleSheet("background-image: url(graficas/logo.jpg);")
+
+        self.servicios_graphicsView_1.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        self.servicios_graphicsView_3.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        self.servicios_graphicsView_4.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        self.servicios_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        self.servicios_graphicsView_6.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        self.servicios_graphicsView_7.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        self.servicios_graphicsView_8.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        
     #Funciones
     def gotoMain(self):
         main = MainScreen()
@@ -319,29 +636,52 @@ def prepareDatabase():
     db.setDatabaseName("cleanwalkers.db")
     if(db.open()):
         q = QSqlQuery()
-        if(q.prepare("CREATE TABLE IF NOT EXISTS calzado (idTenis INTEGER PRIMARY KEY AUTOINCREMENT, TipoCalzado varchar(50), ServicioContratado varchar(50), Marca varchar(50), Talla float, Color varchar(50), Materiales varchar(50), DetallesCalzado varchar(50), FechaLlegada date, Rack integer, Extra varchar(50), Precio integer, Cliente varchar(50), FOREIGN KEY (Cliente) REFERENCES cliente(NombreCliente))")):
+        #crear tabla calzado
+        if(q.prepare("CREATE TABLE IF NOT EXISTS calzado (idTenis INTEGER PRIMARY KEY AUTOINCREMENT, TipoCalzado varchar(50), ServicioContratado varchar(50), Marca varchar(50), Talla float, Color varchar(50), Materiales varchar(50), DetallesCalzado varchar(50), FechaLlegada date, Rack integer, Extra varchar(50), Cliente varchar(50))")):
             if(q.exec()):
                 print("Tabla calzado creada")
-        if(q.prepare("CREATE TABLE IF NOT EXISTS servicio (NombreServicio varchar(50) primary key not null, Costo float, PromedioEntrega varchar(50))")):
+        if(q.prepare("CREATE TABLE IF NOT EXISTS servicio (NombreServicio varchar(50) PRIMARY KEY not null, Costo float, PromedioEntrega varchar(50))")):
             if(q.exec()):
                 print("Tabla servicio creada")
-        if(q.prepare("CREATE TABLE IF NOT EXISTS cliente (idCliente INTEGER PRIMARY KEY AUTOINCREMENT, NombreCliente varchar(50), ApellidoCliente varchar(50), Correo varchar(50), Telefono integer, Sexo varchar(50), FechaNacimineto date, TotalVisitas integer, TotalServicios integer, FechaRegistro date)")):
+        if(q.prepare("CREATE TABLE IF NOT EXISTS cliente (idCliente INTEGER PRIMARY KEY AUTOINCREMENT, NombreCliente varchar(50), ApellidoCliente varchar(50), Correo varchar(50), Telefono integer, Sexo varchar(50), FechaNacimiento date, TotalVisitas integer, TotalServicios integer, FechaRegistro date)")):
             if(q.exec()):
                 print("Tabla cliente creada")
         if(q.prepare("CREATE TABLE IF NOT EXISTS orden (idOrden INTEGER PRIMARY KEY AUTOINCREMENT, idCliente varchar(50), idTenis integer, FechaLlegada date, Costo float, FOREIGN KEY (idCliente) REFERENCES cliente(idCliente), FOREIGN KEY (idTenis) REFERENCES calzado(idTenis))")):
             if(q.exec()):
                 print("Tabla orden creada")
-        if(q.prepare("CREATE TABLE IF NOT EXISTS empleado (idEmpleado INTEGER PRIMARY KEY AUTOINCREMENT, NombreEmpleado varchar(50), ApellidoEmpleado varchar(50), Telefono integer, Correo varchar(50), FechaRegistro date)")):
+        if(q.prepare("CREATE TABLE IF NOT EXISTS empleado (idEmpleado INTEGER PRIMARY KEY AUTOINCREMENT, NombreEmpleado varchar(50), ApellidoEmpleado varchar(50), Telefono integer, Correo varchar(50), TenisLavados integer)")):
             if(q.exec()):
                 print("Tabla empleado creada")
-    #Agregar datos de prueba de clientesCW.csv
-    # with open('clientesCW.csv', errors="ignore") as File:
+    # #Agregar datos de prueba de clientesCW.csv
+    # with open('csv/clientesCW.csv', errors="ignore") as File:
     #     reader = csv.reader(File)
     #     for row in reader:
     #         con = sql.connect("cleanwalkers.db")
     #         cursor = con.cursor()
     #         if cursor.fetchone() == None:
-    #             instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimineto, TotalVisitas, TotalServicios) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}')")
+    #             instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimiento, TotalVisitas, TotalServicios, FechaRegistro) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}')")
+    #             con.execute(instruccion)
+    #             con.commit()
+    #             con.close()
+    # #Agregar datos de calzadoF.csv
+    # with open ('csv/calzadoF.csv', errors="ignore") as File:
+    #     reader = csv.reader(File)
+    #     for row in reader:
+    #         con = sql.connect("cleanwalkers.db")
+    #         cursor = con.cursor()
+    #         if cursor.fetchone() == None:
+    #             instruccion = (f"INSERT INTO calzado (TipoCalzado, ServicioContratado, Marca, Talla, Color, Materiales, DetallesCalzado, FechaLlegada, Rack, Extra, Cliente) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}', '{row[9]}', '{row[10]}')")
+    #             con.execute(instruccion)
+    #             con.commit()
+    #             con.close()
+    # #Agregar datos de empleado.csv
+    # with open ('csv/empleado.csv', errors="ignore") as File:
+    #     reader = csv.reader(File)
+    #     for row in reader:
+    #         con = sql.connect("cleanwalkers.db")
+    #         cursor = con.cursor()
+    #         if cursor.fetchone() == None:
+    #             instruccion = (f"INSERT INTO empleado (NombreEmpleado, ApellidoEmpleado, Telefono, Correo, TenisLavados) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}')")
     #             con.execute(instruccion)
     #             con.commit()
     #             con.close()
@@ -359,7 +699,7 @@ def verificarServicios():
         con.execute(instruccion)
         instruccion = (f"INSERT INTO servicio (NombreServicio, Costo, PromedioEntrega) VALUES ('VIP', 180, '1 semana')")
         con.execute(instruccion)
-        instruccion = (f"INSERT INTO servicio (NombreServicio, Costo, PromedioEntrega) VALUES ('Utra White', 160, '1 semana')")
+        instruccion = (f"INSERT INTO servicio (NombreServicio, Costo, PromedioEntrega) VALUES ('Ultra White', 160, '1 semana')")
         con.execute(instruccion)
         instruccion = (f"INSERT INTO servicio (NombreServicio, Costo, PromedioEntrega) VALUES ('Suede', 150, '1 semana')")
         con.execute(instruccion)
@@ -370,7 +710,7 @@ def verificarServicios():
 prepareDatabase()
 verificarServicios()
 app = QApplication(sys.argv)
-welcome = WelcomeScreen()
+welcome = DashboardScreen() #WelcomeScreen CAMBIAR
 widget = QtWidgets.QStackedWidget()
 widget.addWidget(welcome)
 widget.show()
