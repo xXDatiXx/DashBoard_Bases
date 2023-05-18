@@ -295,7 +295,6 @@ class DashboardScreen(QMainWindow):
         self.regresarButton.clicked.connect(self.gotoMain)
         self.regresarButton_11.clicked.connect(self.gotoMain)
         self.regresarButton_12.clicked.connect(self.gotoMain)
-        self.regresarButton_13.clicked.connect(self.gotoMain)
         resizePequeño = 240
         resizePequeño2 = 250
         resizeGrande1 = 511
@@ -348,20 +347,16 @@ class DashboardScreen(QMainWindow):
         for i in range(len(df["FechaNacimiento"])):
             if df["FechaNacimiento"][i] < 10 or df["FechaNacimiento"][i] > 100:
                 df["FechaNacimiento"][i] = random.randint(10,50)
-        
         plt.figure (figsize=(4,4))
         plt.title("Número de clientes por edad")
         plt.ylabel("Total")
         plt.xlabel("Edad")
         plt.hist(df["FechaNacimiento"], bins=10, color="#F2C94C")
-        #download image
         plt.savefig("graficas/clientes2.png")
-        #resize image with PIL
         img = Image.open("graficas/clientes2.png")
         img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
         img.save("graficas/clientes2.png")
         self.clientes_graphicsView_2.setStyleSheet("background-image: url(graficas/clientes2.png);")
-        #limpiar variables
         plt.close()
 
         #------------------------
@@ -394,6 +389,7 @@ class DashboardScreen(QMainWindow):
         result = cursor.fetchall()
         df = pd.DataFrame(result) 
         df.columns = ["Nombre", "Apellido", "TotalServicios"] 
+        plt.figure (figsize=(4,8))
         df["Nombre"] = df["Nombre"] + " " + df["Apellido"]
         df = df.drop(["Apellido"], axis=1) #eliminar columna Apellido 
         #inclinar los nombres
@@ -410,50 +406,35 @@ class DashboardScreen(QMainWindow):
         #------------------------
         #clientes_graphicsView_5
         #------------------------
-        #Lineplot de la fechaRegistro de los clientes
-        # cursor.execute("SELECT FechaRegistro FROM cliente")
-        # result = cursor.fetchall()
-        # df = pd.DataFrame(result)
-        # df.columns = ["FechaRegistro"]
-        # #Formato de fecha en db es dd/mm/yyyy
-        # #Se convierte a mm
-        # df["FechaRegistro"] = df["FechaRegistro"].str.slice(start=3, stop=5)
-        # df["FechaRegistro"] = df["FechaRegistro"].astype(int)
-        # df["FechaRegistro"] = df["FechaRegistro"].replace([1,2,3,4,5,6,7,8,9,10,11,12], ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto","Septiembre", "Octubre", "Noviembre", "Diciembre"])
-
-        # plt.figure (figsize=(4,4))
-        # plt.title("Fecha de registro de los clientes")
-        # plt.ylabel("Total")
-        # plt.xlabel("Fecha")
-        # plt.plot(df["FechaRegistro"], color="#F2C94C")
-        # #download image
-        # plt.savefig("graficas/clientes5.png")
-        # #resize image with PIL
-        # img = Image.open("graficas/clientes5.png")
-        # img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
-        # img.save("graficas/clientes5.png")
-        # self.clientes_graphicsView_5.setStyleSheet("background-image: url(graficas/clientes5.png);")
-        # #limpiar variables
-        # plt.close()
+        #Grafica de barras, clientes por mes de registro
+        self.clientes_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        
 
 
         #------------------------
         #clientes_graphicsView_6
         #------------------------
-        #Promedio de TotalServicios según sus visitasdel cliente
-
+        # cursor.execute("SELECT STRFTIME('%m', datetime(FechaRegistro, 'unixepoch')) as Mes, COUNT(*) as total FROM cliente GROUP BY STRFTIME('%m', datetime(FechaRegistro, 'unixepoch'))")
+        # result = cursor.fetchall()
+        # df = pd.DataFrame(result)
+        # df.columns = ["Mes", "Total"]
+        # plt.figure (figsize=(4,4))
+        # plt.title("Clientes registrados por mes")
+        # plt.xticks(rotation = 45)
+        # sns.barplot(x="Mes", y="Total", data=df, palette="cividis")
+        # #download image
+        # plt.savefig("graficas/clientes7.png")
+        # #resize image with PIL
+        # img = Image.open("graficas/clientes6.png")
+        # img = img.resize((461,331), Image.ANTIALIAS)
+        # img.save("graficas/clientes7.png")
+        # self.clientes_graphicsView_7.setStyleSheet("background-image: url(graficas/clientes7.png);")
+        # plt.close()
+        
         #------------------------
         #clientes_graphicsView_7
         #------------------------
         #Gráfica de barras
-
-
-        
-        self.calzado_graphicsView_4.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        #scatter plot, fechaLlegada vs calzado en ese día
-        self.calzado_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        self.calzado_graphicsView_6.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        self.calzado_graphicsView_8.setStyleSheet("background-image: url(graficas/logo.jpg);")
         
 
         #------------------------
@@ -497,20 +478,6 @@ class DashboardScreen(QMainWindow):
         #------------------------
         #calzado_graphicsView_4
         #------------------------
-        #grafica de barras, con la marca de calzado y el total de calzado de esa marca
-        # cursor.execute("SELECT Marca, COUNT(*) FROM calzado GROUP BY Marca")
-        # result = cursor.fetchall()
-        # df = pd.DataFrame(result)
-        # df.columns = ["Marca", "Total"]
-        # plt.figure (figsize=(5,5))
-        # plt.title("Marcas de los calzados")
-        # plt.bar(df["Marca"], df["Total"], color=["#FFC300", "#FF5733"])
-        # plt.savefig("graficas/calzado4.png")
-        # img = Image.open("graficas/calzado4.png")
-        # img = img.resize((resizeGrande1,resizeGrande2), Image.ANTIALIAS)
-        # img.save("graficas/calzado4.png")
-        # #self.calzado_graphicsView_4.setStyleSheet("background-image: url(graficas/calzado4.png);")
-        # plt.close()
         cursor.execute("SELECT Marca, COUNT(*) AS CNT FROM calzado GROUP BY Marca")
         result = cursor.fetchall()
         df = pd.DataFrame(result) 
@@ -569,27 +536,26 @@ class DashboardScreen(QMainWindow):
         #------------------------
         #calzado_graphicsView_8
         #------------------------
-        #grafica pastel sobre el tipo de calzado
-        # cursor.execute("SELECT ServicioContratado, COUNT(*) FROM calzado GROUP BY ServicioContratado")
-        # result = cursor.fetchall()
-        # df = pd.DataFrame(result)
-        # df.columns = ["ServicioContratado", "Total"]
+        #grafica de tendencia de FechaLlegada del calzado
 
-        # plt.figure (figsize=(5,5))
-        # plt.title("Servicios contratados")
-        # plt.pie(df["Total"], labels=df["ServicioContratado"], autopct="%1.1f%%", shadow=True, startangle=90)
-        # plt.axis("equal")
-        # plt.savefig("graficas/calzado8.png")
-        # img = Image.open("graficas/calzado8.png")
-        # img = img.resize((resizePequeño2,resizePequeño2), Image.ANTIALIAS)
-        # img.save("graficas/calzado8.png")
-        # self.calzado_graphicsView_8.setStyleSheet("background-image: url(graficas/calzado8.png);")
-        # plt.close()
+        self.calzado_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        self.calzado_graphicsView_8.setStyleSheet("background-image: url(graficas/logo.jpg);")
 
+        #------------------------
+        #empleados_graphicsView_1
+        #------------------------
         
 
+        #------------------------
+        #empleados_graphicsView_3
+        #------------------------
+        #Grafica de columnas Seleccionar ServicioContratado de calzado lo contamos y lo multiplicamos por el costo de la tabla servicio
+        # cursor.execute("SELECT NombreServicio, Costo, 00.St_ FROM servicio, (SELECT ServicioContratado, COUNT(*) FROM calzado GROUP BY ServicioContratado END AS St_)00 ")
+        # result = cursor.fetchall()
+        # df = pd.DataFrame(result)
+        # print(df)
+        
 
-        self.empleados_graphicsView_1.setStyleSheet("background-image: url(graficas/logo.jpg);")
         self.empleados_graphicsView_3.setStyleSheet("background-image: url(graficas/logo.jpg);")
 
         #------------------------
@@ -604,7 +570,6 @@ class DashboardScreen(QMainWindow):
         plt.title("Tenis lavados por empleado")
         plt.xticks(rotation = 45)
         sns.barplot(x="Nombre", y="Total", data=df, palette="cividis")
-        
         plt.savefig("graficas/empleados4.png")  
         img = Image.open("graficas/empleados4.png")
         img = img.resize((resizeGrande1,resizeGrande2), Image.ANTIALIAS)
@@ -612,17 +577,28 @@ class DashboardScreen(QMainWindow):
         self.empleados_graphicsView_4.setStyleSheet("background-image: url(graficas/empleados4.png);")
 
         self.empleados_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        self.empleados_graphicsView_6.setStyleSheet("background-image: url(graficas/logo.jpg);")
+
+        #------------------------
+        #empleados_graphicsView_6
+        #------------------------
+        #Grafica lineplot de FechaLlegada de calzado por meses
+        cursor.execute("SELECT FechaLlegada, COUNT(*) FROM calzado GROUP BY FechaLlegada")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["FechaLlegada", "Total"]
+        plt.figure (figsize=(4,4))
+        plt.title("Fecha de llegada de calzado")
+        plt.xticks(rotation = 45)
+        sns.lineplot(x="FechaLlegada", y="Total", data=df, palette="cividis")
+        plt.savefig("graficas/empleados6.png")
+        img = Image.open("graficas/empleados6.png")
+        img = img.resize((461,301), Image.ANTIALIAS)
+        img.save("graficas/empleados6.png")
+        self.empleados_graphicsView_6.setStyleSheet("background-image: url(graficas/empleados6.png);")
+        plt.close()
+
         self.empleados_graphicsView_7.setStyleSheet("background-image: url(graficas/logo.jpg);")
         self.empleados_graphicsView_8.setStyleSheet("background-image: url(graficas/logo.jpg);")
-
-        self.servicios_graphicsView_1.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        self.servicios_graphicsView_3.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        self.servicios_graphicsView_4.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        self.servicios_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        self.servicios_graphicsView_6.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        self.servicios_graphicsView_7.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        self.servicios_graphicsView_8.setStyleSheet("background-image: url(graficas/logo.jpg);")
         
     #Funciones
     def gotoMain(self):
@@ -663,7 +639,7 @@ def prepareDatabase():
     #             con.execute(instruccion)
     #             con.commit()
     #             con.close()
-    # #Agregar datos de calzadoF.csv
+    # # #Agregar datos de calzadoF.csv
     # with open ('csv/calzadoF.csv', errors="ignore") as File:
     #     reader = csv.reader(File)
     #     for row in reader:
@@ -674,7 +650,7 @@ def prepareDatabase():
     #             con.execute(instruccion)
     #             con.commit()
     #             con.close()
-    # #Agregar datos de empleado.csv
+    # # #Agregar datos de empleado.csv
     # with open ('csv/empleado.csv', errors="ignore") as File:
     #     reader = csv.reader(File)
     #     for row in reader:
