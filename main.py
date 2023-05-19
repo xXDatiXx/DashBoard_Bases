@@ -381,12 +381,12 @@ class DashboardScreen(QMainWindow):
         df = pd.DataFrame(result)
         df.columns = ["Nombre", "Apellido", "TotalServicios"]
         plt.figure (figsize=(5,5))
-        plt.xticks(rotation=-45)
+        plt.xticks(rotation=-20)
         plt.title("Clientes con mas servicios")
         sns.barplot(x="Nombre", y="TotalServicios", data=df, palette="rocket")
         plt.savefig("graficas/clientes5.png")
         img = Image.open("graficas/clientes5.png")
-        img = img.crop((0, 30, 500, 500))
+        img = img.crop((0, 30, 500, 480)) #
         img = img.resize((531,250), Image.LANCZOS)
         img.save("graficas/clientes5.png")
         self.clientes_graphicsView_5.setStyleSheet("background-image: url(graficas/clientes5.png);")
@@ -637,11 +637,11 @@ class DashboardScreen(QMainWindow):
         df.columns = ["Nombre", "Total"]
         plt.figure (figsize=(4,4))
         plt.title("Tenis lavados por empleado")
-        plt.xticks(rotation = 45)
+        plt.xticks(rotation = 25)
         sns.barplot(x="Nombre", y="Total", data=df, palette="rocket")
         plt.savefig("graficas/empleados4.png")  
         img = Image.open("graficas/empleados4.png")
-        img = img.crop((0, 25, 400, 400))
+        img = img.crop((0, 20, 400, 400))
         img = img.resize((resizeGrande1,resizeGrande2), Image.LANCZOS)
         img.save("graficas/empleados4.png")
         self.empleados_graphicsView_4.setStyleSheet("background-image: url(graficas/empleados4.png);")
@@ -658,14 +658,14 @@ class DashboardScreen(QMainWindow):
         #leer lluvias.csv
         df = pd.read_csv("csv/Lluvias.csv")
         df.columns = ["Mes", "Lluvias"]
-        plt.figure (figsize=(5,5))
+        plt.figure (figsize=(5.1,5)) 
         plt.title("Lluvias")
-        plt.xticks(rotation = 45)
+        plt.xticks(rotation = 37)
         sns.lineplot(x="Lluvias", y="Mes", data=df, color="#811e5a")
         plt.savefig("graficas/empleados6.png")
         img = Image.open("graficas/empleados6.png")
-        img = img.crop((15, 30, 480,500)) #left, top, right, bottom
-        img = img.resize((461,301), Image.LANCZOS)
+        img = img.crop((20, 30, 490,500)) #left, top, right, bottom
+        img = img.resize((465,300), Image.LANCZOS) #width, height
         img.save("graficas/empleados6.png")
         self.empleados_graphicsView_6.setStyleSheet("background-image: url(graficas/empleados6.png);")
         
@@ -776,7 +776,8 @@ def verificarServicios():
 # prepareDatabase()
 # verificarServicios()
 app = QApplication(sys.argv)
-welcome = WelcomeScreen()
+ # welcome = WelcomeScreen()
+welcome = DashboardScreen()
 widget = QtWidgets.QStackedWidget()
 widget.addWidget(welcome)
 widget.show()
