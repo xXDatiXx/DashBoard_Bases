@@ -319,7 +319,7 @@ class DashboardScreen(QMainWindow):
         df.columns = ["Sexo", "Total"]
         plt.figure (figsize=(4,4))
         plt.title("Sexo de los clientes")
-        plt.pie(df["Total"], labels=df["Sexo"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#F2C94C", "#0f3463"])
+        plt.pie(df["Total"], labels=df["Sexo"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#811e5a", "#f6bd9b"])
         plt.axis("equal")
         #download image
         plt.savefig("graficas/clientes1.png")
@@ -340,7 +340,7 @@ class DashboardScreen(QMainWindow):
         df.columns = ["Sexo", "Total"]
         plt.figure (figsize=(7,5))
         plt.title("Ganancias por Sexo")
-        plt.bar(df["Sexo"], df["Total"], color=["#FABC00", "#87CEEB"])
+        sns.barplot(x="Sexo", y="Total", data=df, palette="rocket")
         plt.savefig("graficas/clientes2.png")
         img = Image.open("graficas/clientes2.png")
         #recortar imagen parte de arriba
@@ -360,7 +360,7 @@ class DashboardScreen(QMainWindow):
         df.columns = ["Sexo", "Promedio"]
         plt.figure (figsize=(5,5))
         plt.title("Promedio de servicios por sexo")
-        plt.bar(df["Sexo"], df["Promedio"], color=["#F2C94C", "#0f3463"])
+        sns.barplot(x="Sexo", y="Promedio", data=df, palette="rocket")
         #download image
         plt.savefig("graficas/clientes3.png")
         #resize image with PIL
@@ -383,7 +383,7 @@ class DashboardScreen(QMainWindow):
         plt.figure (figsize=(5,5))
         plt.xticks(rotation=-45)
         plt.title("Clientes con mas servicios")
-        sns.barplot(x="Nombre", y="TotalServicios", data=df, palette="cividis")
+        sns.barplot(x="Nombre", y="TotalServicios", data=df, palette="rocket")
         plt.savefig("graficas/clientes5.png")
         img = Image.open("graficas/clientes5.png")
         img = img.crop((0, 30, 500, 500))
@@ -396,12 +396,6 @@ class DashboardScreen(QMainWindow):
 
 
         self.clientes_graphicsView_4.setStyleSheet("background-image: url(graficas/MJ_Cuadro.jpg);")
-
-        #------------------------
-        #clientes_graphicsView_5
-        #------------------------
-        #Grafica de barras, clientes por mes de registro
-        #self.clientes_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
         
         #------------------------
         #clientes_graphicsView_7
@@ -424,7 +418,7 @@ class DashboardScreen(QMainWindow):
         plt.title("Número de clientes por edad")
         plt.ylabel("Total")
         plt.xlabel("Edad")
-        plt.hist(df["FechaNacimiento"], bins=10, color="#F2C94C")
+        plt.hist(df["FechaNacimiento"], bins=10, color="#811e5a")
         plt.savefig("graficas/clientes7.png")
         img = Image.open("graficas/clientes7.png")
         img = img.resize((461,331), Image.LANCZOS)
@@ -444,7 +438,7 @@ class DashboardScreen(QMainWindow):
         plt.figure (figsize=(4,4))
         plt.title("Tipos de Calzado")
         explode = (0.05, 0.05, 0.05, 0.05, 0.05)
-        plt.pie(df["Total"], labels=df["TipoCalzado"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#BAA050", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00"], pctdistance=0.85, explode=explode)
+        plt.pie(df["Total"], labels=df["TipoCalzado"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#811e5a", "#ef5b41", "#f6bd9b"], pctdistance=0.85, explode=explode)
 
         #----------------------------------------------
         centre_circle = plt.Circle((0, 0), 0.60, fc='white')
@@ -471,7 +465,7 @@ class DashboardScreen(QMainWindow):
         plt.figure (figsize=(4,4))
         plt.title("Materiales del Calzado")
         explode = (0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05)
-        plt.pie(df["Total"], labels=df["Materiales"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#BAA050"], explode=explode)
+        plt.pie(df["Total"], labels=df["Materiales"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#811e5a", "#ef5b41", "#f6bd9b"], explode=explode)
         plt.axis("equal")
         plt.savefig("graficas/calzado3.png")
         img = Image.open("graficas/calzado3.png")
@@ -490,7 +484,7 @@ class DashboardScreen(QMainWindow):
         #inclinar los nombres
         plt.yticks(rotation=45)
         plt.title("Servicios por Marca")
-        sns.barplot(x="Total", y="Marca", data=df, palette="cividis")
+        sns.barplot(x="Total", y="Marca", data=df, palette="rocket")
         plt.savefig("graficas/calzado4.png")
         img = Image.open("graficas/calzado4.png")
         img = img.crop((0, 30, 590, 480))
@@ -531,7 +525,7 @@ class DashboardScreen(QMainWindow):
         plt.yticks(rotation=0)
         plt.xticks(rotation = 45)
         plt.title("Tallas usuales")
-        plt.stem(df["Total"], df["Talla"], use_line_collection=True)
+        plt.stem(df["Total"], df["Talla"], use_line_collection=True, linefmt="#811e5a", markerfmt="#e63b3f", basefmt="#f6b08a")
         plt.savefig("graficas/calzado6.png")
         img = Image.open("graficas/calzado6.png")
         img = img.resize((resizeGrande3,resizeGrande4), Image.LANCZOS)
@@ -550,7 +544,7 @@ class DashboardScreen(QMainWindow):
         plt.figure (figsize=(4,4))
         plt.title("Servicios contratados") 
         explode = (0.05, 0.05, 0.05, 0.05, 0.05, 0.05)
-        plt.pie(df["Total"], labels=df["ServicioContratado"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB"], pctdistance=0.85, explode=explode)
+        plt.pie(df["Total"], labels=df["ServicioContratado"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#811e5a", "#ef5b41", "#f6bd9b"], pctdistance=0.85, explode=explode)
         centre_circle = plt.Circle((0, 0), 0.60, fc='white')
         fig = plt.gcf()
         fig.gca().add_artist(centre_circle)
@@ -565,26 +559,6 @@ class DashboardScreen(QMainWindow):
         #------------------------
         #calzado_graphicsView_8
         #------------------------
-        #grafica de tendencia de FechaLlegada del calzado
-        # cursor.execute("SELECT Month(FechaLlegada), COUNT(*) FROM calzado")
-        # result = cursor.fetchall()
-        # df = pd.DataFrame(result)
-        # df.columns = ["Nombre", "Total"]
-        # plt.figure (figsize=(4,4))
-        # plt.title("Tenis lavados por empleado")
-        # plt.xticks(rotation = 45)
-        # sns.barplot(x="Nombre", y="Total", data=df, palette="cividis")
-        # plt.savefig("graficas/empleados4.png")  
-        # img = Image.open("graficas/empleados4.png")
-        # img = img.crop((0, 25, 400, 400))
-        # img = img.resize((resizeGrande1,resizeGrande2), Image.LANCZOS)
-        # img.save("graficas/empleados4.png")
-        # self.empleados_graphicsView_4.setStyleSheet("background-image: url(graficas/empleados4.png);")
-        # img = Image.open("graficas/logoTenis.png")
-        # img = img.resize((900,641), Image.LANCZOS)
-        # img = img.crop((275, 0, 720, 641))
-        # img.save("graficas/logoTenis1.png")
-        # self.empleados_graphicsView_5.setStyleSheet("background-image: url(graficas/logoTenis1.png);")
         cursor.execute("SELECT Color, COUNT(*) FROM calzado GROUP BY Color")
         result = cursor.fetchall()
         df = pd.DataFrame(result)
@@ -592,7 +566,7 @@ class DashboardScreen(QMainWindow):
         plt.figure (figsize=(4,4))
         plt.title("Colores usados") 
         explode = (0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05)
-        plt.pie(df["Total"], labels=df["Color"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB" ], pctdistance=0.85, explode=explode)
+        plt.pie(df["Total"], labels=df["Color"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#811e5a", "#ef5b41", "#f6bd9b"], pctdistance=0.85, explode=explode)
         centre_circle = plt.Circle((0, 0), 0.60, fc='white')
         fig = plt.gcf()
         fig.gca().add_artist(centre_circle)
@@ -605,8 +579,6 @@ class DashboardScreen(QMainWindow):
         plt.close()
 
 
-        
-        
         img = Image.open("graficas/logo.jpg")
         img = img.crop((50, 50, 480, 720))
         img.save("graficas/logo1.jpg")
@@ -615,6 +587,22 @@ class DashboardScreen(QMainWindow):
         #------------------------
         #empleados_graphicsView_1
         #------------------------
+        cursor.execute("SELECT A.ServicioContratado, (COUNT(A.ServicioContratado)*B.Costo) AS Ganancia FROM calzado A, servicio B WHERE A.ServicioContratado = B.NombreServicio GROUP BY ServicioContratado")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["ServicioContratado", "Total"]
+        plt.figure (figsize=(5,5))
+        plt.title("Ganancias por servicio")
+        plt.xticks(rotation = 20)
+        plt.yticks(rotation=45)
+        sns.barplot(x="ServicioContratado", y="Total", data=df, palette="rocket")
+        plt.savefig("graficas/empleados1.png")
+        img = Image.open("graficas/empleados1.png")
+        img = img.crop((0, 35, 480, 500))
+        img = img.resize((resizePequeño2,resizePequeño2), Image.LANCZOS)
+        img.save("graficas/empleados1.png")
+        self.empleados_graphicsView_1.setStyleSheet("background-image: url(graficas/empleados1.png);")
+        plt.close()
 
 
         #------------------------
@@ -627,7 +615,7 @@ class DashboardScreen(QMainWindow):
         df.columns = ["ServicioContratado", "Total"]
         plt.figure (figsize=(4,4))
         plt.title("Porcentaje de ganancias por servicio")
-        plt.pie(df["Total"], labels=df["ServicioContratado"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB"])
+        plt.pie(df["Total"], labels=df["ServicioContratado"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#811e5a", "#ef5b41", "#f6bd9b"])
         centre_circle = plt.Circle((0, 0), 0.60, fc='white')
         fig = plt.gcf()
         fig.gca().add_artist(centre_circle)
@@ -650,7 +638,7 @@ class DashboardScreen(QMainWindow):
         plt.figure (figsize=(4,4))
         plt.title("Tenis lavados por empleado")
         plt.xticks(rotation = 45)
-        sns.barplot(x="Nombre", y="Total", data=df, palette="cividis")
+        sns.barplot(x="Nombre", y="Total", data=df, palette="rocket")
         plt.savefig("graficas/empleados4.png")  
         img = Image.open("graficas/empleados4.png")
         img = img.crop((0, 25, 400, 400))
@@ -667,23 +655,7 @@ class DashboardScreen(QMainWindow):
         #empleados_graphicsView_6
         #------------------------
         #Grafica pastel Seleccionar ServicioContratado de calzado lo contamos y lo multiplicamos por el costo de la tabla servicio
-        cursor.execute("SELECT A.ServicioContratado, (COUNT(A.ServicioContratado)*B.Costo) AS Ganancia FROM calzado A, servicio B WHERE A.ServicioContratado = B.NombreServicio GROUP BY ServicioContratado")
-        result = cursor.fetchall()
-        df = pd.DataFrame(result)
-        df.columns = ["ServicioContratado", "Total"]
-        plt.figure (figsize=(8,7))
-        plt.title("Ganancias por servicio")
-        plt.bar(df["ServicioContratado"], df["Total"], color=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB"])
-        #color=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB"]
-        plt.savefig("graficas/empleados6.png")
-        img = Image.open("graficas/empleados6.png")
-        #recortar imagen parte de arriba
-        img = img.crop((0, 55, 800, 700))
-        img = img.resize((resizeGrande3,resizeGrande4), Image.LANCZOS)
-        img.save("graficas/empleados6.png")
-        self.empleados_graphicsView_6.setStyleSheet("background-image: url(graficas/empleados6.png);")
-        plt.close()
-
+        
         #------------------------
         #empleados_graphicsView_7
         #------------------------
@@ -694,15 +666,34 @@ class DashboardScreen(QMainWindow):
         plt.figure (figsize=(4,4))
         plt.title("Lluvias")
         plt.xticks(rotation = 45)
-        sns.lineplot(x="Lluvias", y="Mes", data=df, color="#FABC00")
+        sns.lineplot(x="Lluvias", y="Mes", data=df, color="#811e5a")
         plt.savefig("graficas/empleados7.png")
         img = Image.open("graficas/empleados7.png")
         img = img.crop((15, 20, 395,400))
         img = img.resize((241,291), Image.LANCZOS)
         img.save("graficas/empleados7.png")
         self.empleados_graphicsView_7.setStyleSheet("background-image: url(graficas/empleados7.png);")
-        #self.empleados_graphicsView_7.setStyleSheet("background-image: url(graficas/logo.jpg);")
         
+        #------------------------
+        #empleados_graphicsView_8
+        #------------------------
+        #Grafica lineplot de 
+        cursor.execute("SELECT FechaLlegada, Count(*) FROM calzado GROUP BY FechaLlegada")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["Fecha", "Total"]
+        plt.figure (figsize=(3,3))
+        plt.title("Tenis recibido por día")
+        plt.bar(df["Fecha"], df["Total"], color="#811e5a")
+        plt.savefig("graficas/empleados8.png")
+        img = Image.open("graficas/empleados8.png")
+        img = img.crop((0, 0, 300,275))
+        img = img.resize((241,291), Image.LANCZOS)
+        img.save("graficas/empleados8.png")
+        self.empleados_graphicsView_8.setStyleSheet("background-image: url(graficas/empleados8.png);")
+        plt.close()
+
+
     #Funciones
     def gotoMain(self):
         main = MainScreen()
