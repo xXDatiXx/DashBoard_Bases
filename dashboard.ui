@@ -648,22 +648,6 @@ font: 18pt &quot;MS Outlook&quot;;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_116">
-      <property name="geometry">
-       <rect>
-        <x>1220</x>
-        <y>355</y>
-        <width>261</width>
-        <height>301</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 236, 0)</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
      <widget class="QPushButton" name="regresarButton_8">
       <property name="geometry">
        <rect>
@@ -730,7 +714,7 @@ font: 18pt &quot;MS Outlook&quot;;</string>
        <rect>
         <x>950</x>
         <y>355</y>
-        <width>261</width>
+        <width>541</width>
         <height>301</height>
        </rect>
       </property>
@@ -739,16 +723,6 @@ font: 18pt &quot;MS Outlook&quot;;</string>
       </property>
       <property name="text">
        <string/>
-      </property>
-     </widget>
-     <widget class="QGraphicsView" name="empleados_graphicsView_8">
-      <property name="geometry">
-       <rect>
-        <x>1230</x>
-        <y>360</y>
-        <width>241</width>
-        <height>291</height>
-       </rect>
       </property>
      </widget>
      <widget class="QLabel" name="label_121">
@@ -798,7 +772,7 @@ border-radius: 15px;</string>
        <rect>
         <x>959</x>
         <y>360</y>
-        <width>241</width>
+        <width>521</width>
         <height>291</height>
        </rect>
       </property>
@@ -920,7 +894,7 @@ font: 18pt &quot;MS Outlook&quot;;</string>
      <x>0</x>
      <y>0</y>
      <width>1500</width>
-     <height>26</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>

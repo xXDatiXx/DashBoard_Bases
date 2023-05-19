@@ -413,7 +413,7 @@ class DashboardScreen(QMainWindow):
         #Verificar que no haya edades menores a 10 ni mayores a 100 años y si hay ponerlos entre 10 y 50
         for i in range(len(df["FechaNacimiento"])):
             if df["FechaNacimiento"][i] < 10 or df["FechaNacimiento"][i] > 100:
-                df["FechaNacimiento"][i] = random.randint(10,50)
+                df["FechaNacimiento"][i] = random.randint(18,50)
         plt.figure (figsize=(5,4))
         plt.title("Número de clientes por edad")
         plt.ylabel("Total")
@@ -654,28 +654,23 @@ class DashboardScreen(QMainWindow):
         #------------------------
         #empleados_graphicsView_6
         #------------------------
-        #Grafica pastel Seleccionar ServicioContratado de calzado lo contamos y lo multiplicamos por el costo de la tabla servicio
-        
-        #------------------------
-        #empleados_graphicsView_7
-        #------------------------
         #Grafica lineplot de lluvias 
         #leer lluvias.csv
         df = pd.read_csv("csv/Lluvias.csv")
         df.columns = ["Mes", "Lluvias"]
-        plt.figure (figsize=(4,4))
+        plt.figure (figsize=(5,5))
         plt.title("Lluvias")
         plt.xticks(rotation = 45)
         sns.lineplot(x="Lluvias", y="Mes", data=df, color="#811e5a")
-        plt.savefig("graficas/empleados7.png")
-        img = Image.open("graficas/empleados7.png")
-        img = img.crop((15, 20, 395,400))
-        img = img.resize((241,291), Image.LANCZOS)
-        img.save("graficas/empleados7.png")
-        self.empleados_graphicsView_7.setStyleSheet("background-image: url(graficas/empleados7.png);")
+        plt.savefig("graficas/empleados6.png")
+        img = Image.open("graficas/empleados6.png")
+        img = img.crop((15, 30, 480,500)) #left, top, right, bottom
+        img = img.resize((461,301), Image.LANCZOS)
+        img.save("graficas/empleados6.png")
+        self.empleados_graphicsView_6.setStyleSheet("background-image: url(graficas/empleados6.png);")
         
         #------------------------
-        #empleados_graphicsView_8
+        #empleados_graphicsView_7
         #------------------------
         #Grafica lineplot de 
         cursor.execute("SELECT FechaLlegada, Count(*) FROM calzado GROUP BY FechaLlegada")
@@ -685,12 +680,12 @@ class DashboardScreen(QMainWindow):
         plt.figure (figsize=(3,3))
         plt.title("Tenis recibido por día")
         plt.bar(df["Fecha"], df["Total"], color="#811e5a")
-        plt.savefig("graficas/empleados8.png")
-        img = Image.open("graficas/empleados8.png")
+        plt.savefig("graficas/empleados7.png")
+        img = Image.open("graficas/empleados7.png")
         img = img.crop((0, 0, 300,275))
-        img = img.resize((241,291), Image.LANCZOS)
-        img.save("graficas/empleados8.png")
-        self.empleados_graphicsView_8.setStyleSheet("background-image: url(graficas/empleados8.png);")
+        img = img.resize((521,291), Image.LANCZOS)
+        img.save("graficas/empleados7.png")
+        self.empleados_graphicsView_7.setStyleSheet("background-image: url(graficas/empleados7.png);")
         plt.close()
 
 
@@ -781,7 +776,7 @@ def verificarServicios():
 # prepareDatabase()
 # verificarServicios()
 app = QApplication(sys.argv)
-welcome = DashboardScreen() #WelcomeScreen CAMBIAR
+welcome = WelcomeScreen()
 widget = QtWidgets.QStackedWidget()
 widget.addWidget(welcome)
 widget.show()
