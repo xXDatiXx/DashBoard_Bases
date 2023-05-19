@@ -13,6 +13,7 @@ from PIL import Image
 import csv
 import datetime
 import random
+import numpy as np
 
 #Clase Ventana Login
 class WelcomeScreen(QMainWindow):
@@ -34,7 +35,7 @@ class WelcomeScreen(QMainWindow):
         else:
             self.aviso_lineedit.setText("")
             self.aviso_lineedit.setText("Usuario o contraseña incorrectos.")
-                
+    
     def gotoMain(self):
         main = MainScreen()
         widget.addWidget(main)
@@ -333,7 +334,21 @@ class DashboardScreen(QMainWindow):
         #------------------------
         #clientes_graphicsView_2
         #------------------------
-       
+        cursor.execute("SELECT cli.Sexo, (COUNT(cli.Sexo)*serv.Costo) AS Ganancia FROM calzado cal, servicio serv, cliente cli WHERE cli. NombreCliente = cal.Cliente AND cal.ServicioContratado = serv.NombreServicio GROUP  BY cli.Sexo")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["Sexo", "Total"]
+        plt.figure (figsize=(7,5))
+        plt.title("Ganancias por Sexo")
+        plt.bar(df["Sexo"], df["Total"], color=["#FABC00", "#87CEEB"])
+        plt.savefig("graficas/clientes2.png")
+        img = Image.open("graficas/clientes2.png")
+        #recortar imagen parte de arriba
+        img = img.crop((0, 00, 650, 500))
+        img = img.resize((resizePequeño,resizePequeño), Image.LANCZOS)
+        img.save("graficas/clientes2.png")
+        self.clientes_graphicsView_2.setStyleSheet("background-image: url(graficas/clientes2.png);")
+        plt.close()
 
         #------------------------
         #clientes_graphicsView_3
@@ -455,7 +470,8 @@ class DashboardScreen(QMainWindow):
         df.columns = ["Materiales", "Total"]
         plt.figure (figsize=(4,4))
         plt.title("Materiales del Calzado")
-        plt.pie(df["Total"], labels=df["Materiales"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#BAA050"])
+        explode = (0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05)
+        plt.pie(df["Total"], labels=df["Materiales"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#BAA050"], explode=explode)
         plt.axis("equal")
         plt.savefig("graficas/calzado3.png")
         img = Image.open("graficas/calzado3.png")
@@ -550,6 +566,44 @@ class DashboardScreen(QMainWindow):
         #calzado_graphicsView_8
         #------------------------
         #grafica de tendencia de FechaLlegada del calzado
+        # cursor.execute("SELECT Month(FechaLlegada), COUNT(*) FROM calzado")
+        # result = cursor.fetchall()
+        # df = pd.DataFrame(result)
+        # df.columns = ["Nombre", "Total"]
+        # plt.figure (figsize=(4,4))
+        # plt.title("Tenis lavados por empleado")
+        # plt.xticks(rotation = 45)
+        # sns.barplot(x="Nombre", y="Total", data=df, palette="cividis")
+        # plt.savefig("graficas/empleados4.png")  
+        # img = Image.open("graficas/empleados4.png")
+        # img = img.crop((0, 25, 400, 400))
+        # img = img.resize((resizeGrande1,resizeGrande2), Image.LANCZOS)
+        # img.save("graficas/empleados4.png")
+        # self.empleados_graphicsView_4.setStyleSheet("background-image: url(graficas/empleados4.png);")
+        # img = Image.open("graficas/logoTenis.png")
+        # img = img.resize((900,641), Image.LANCZOS)
+        # img = img.crop((275, 0, 720, 641))
+        # img.save("graficas/logoTenis1.png")
+        # self.empleados_graphicsView_5.setStyleSheet("background-image: url(graficas/logoTenis1.png);")
+        cursor.execute("SELECT Color, COUNT(*) FROM calzado GROUP BY Color")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["Color", "Total"]
+        plt.figure (figsize=(4,4))
+        plt.title("Colores usados") 
+        explode = (0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05)
+        plt.pie(df["Total"], labels=df["Color"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB" ], pctdistance=0.85, explode=explode)
+        centre_circle = plt.Circle((0, 0), 0.60, fc='white')
+        fig = plt.gcf()
+        fig.gca().add_artist(centre_circle)
+        plt.axis("equal")
+        plt.savefig("graficas/calzado8.png")
+        img = Image.open("graficas/calzado8.png")
+        img = img.resize((resizePequeño2,resizePequeño2), Image.LANCZOS)
+        img.save("graficas/calzado8.png")
+        self.calzado_graphicsView_8.setStyleSheet("background-image: url(graficas/calzado8.png);")
+        plt.close()
+
 
         
         
@@ -557,9 +611,6 @@ class DashboardScreen(QMainWindow):
         img = img.crop((50, 50, 480, 720))
         img.save("graficas/logo1.jpg")
         self.calzado_graphicsView_5.setStyleSheet("background-image: url(graficas/logo1.jpg);")
-
-
-        self.calzado_graphicsView_8.setStyleSheet("background-image: url(graficas/logo.jpg);")
 
         #------------------------
         #empleados_graphicsView_1
@@ -606,7 +657,6 @@ class DashboardScreen(QMainWindow):
         img = img.resize((resizeGrande1,resizeGrande2), Image.LANCZOS)
         img.save("graficas/empleados4.png")
         self.empleados_graphicsView_4.setStyleSheet("background-image: url(graficas/empleados4.png);")
-
         img = Image.open("graficas/logoTenis.png")
         img = img.resize((900,641), Image.LANCZOS)
         img = img.crop((275, 0, 720, 641))
@@ -622,8 +672,9 @@ class DashboardScreen(QMainWindow):
         df = pd.DataFrame(result)
         df.columns = ["ServicioContratado", "Total"]
         plt.figure (figsize=(8,7))
-        plt.title("Porcentaje de ganancias por servicio")
+        plt.title("Ganancias por servicio")
         plt.bar(df["ServicioContratado"], df["Total"], color=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB"])
+        #color=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB"]
         plt.savefig("graficas/empleados6.png")
         img = Image.open("graficas/empleados6.png")
         #recortar imagen parte de arriba
@@ -633,9 +684,24 @@ class DashboardScreen(QMainWindow):
         self.empleados_graphicsView_6.setStyleSheet("background-image: url(graficas/empleados6.png);")
         plt.close()
 
-
-        self.empleados_graphicsView_7.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        self.empleados_graphicsView_8.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        #------------------------
+        #empleados_graphicsView_7
+        #------------------------
+        #Grafica lineplot de lluvias 
+        #leer lluvias.csv
+        df = pd.read_csv("csv/Lluvias.csv")
+        df.columns = ["Mes", "Lluvias"]
+        plt.figure (figsize=(4,4))
+        plt.title("Lluvias")
+        plt.xticks(rotation = 45)
+        sns.lineplot(x="Lluvias", y="Mes", data=df, color="#FABC00")
+        plt.savefig("graficas/empleados7.png")
+        img = Image.open("graficas/empleados7.png")
+        img = img.crop((15, 20, 395,400))
+        img = img.resize((241,291), Image.LANCZOS)
+        img.save("graficas/empleados7.png")
+        self.empleados_graphicsView_7.setStyleSheet("background-image: url(graficas/empleados7.png);")
+        #self.empleados_graphicsView_7.setStyleSheet("background-image: url(graficas/logo.jpg);")
         
     #Funciones
     def gotoMain(self):
@@ -644,60 +710,61 @@ class DashboardScreen(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex()+1)
 
 #Funcion para preparar la base de Datos
-def prepareDatabase():
-    db = QSqlDatabase.addDatabase("QSQLITE")
-    db.setDatabaseName("cleanwalkers.db")
-    if(db.open()):
-        q = QSqlQuery()
-        #crear tabla calzado
-        if(q.prepare("CREATE TABLE IF NOT EXISTS calzado (idTenis INTEGER PRIMARY KEY AUTOINCREMENT, TipoCalzado varchar(50), ServicioContratado varchar(50), Marca varchar(50), Talla float, Color varchar(50), Materiales varchar(50), DetallesCalzado varchar(50), FechaLlegada date, Rack integer, Extra varchar(50), Cliente varchar(50))")):
-            if(q.exec()):
-                print("Tabla calzado creada")
-        if(q.prepare("CREATE TABLE IF NOT EXISTS servicio (NombreServicio varchar(50) PRIMARY KEY not null, Costo float, PromedioEntrega varchar(50))")):
-            if(q.exec()):
-                print("Tabla servicio creada")
-        if(q.prepare("CREATE TABLE IF NOT EXISTS cliente (idCliente INTEGER PRIMARY KEY AUTOINCREMENT, NombreCliente varchar(50), ApellidoCliente varchar(50), Correo varchar(50), Telefono integer, Sexo varchar(50), FechaNacimiento date, TotalVisitas integer, TotalServicios integer, FechaRegistro date)")):
-            if(q.exec()):
-                print("Tabla cliente creada")
-        if(q.prepare("CREATE TABLE IF NOT EXISTS orden (idOrden INTEGER PRIMARY KEY AUTOINCREMENT, idCliente varchar(50), idTenis integer, FechaLlegada date, Costo float, FOREIGN KEY (idCliente) REFERENCES cliente(idCliente), FOREIGN KEY (idTenis) REFERENCES calzado(idTenis))")):
-            if(q.exec()):
-                print("Tabla orden creada")
-        if(q.prepare("CREATE TABLE IF NOT EXISTS empleado (idEmpleado INTEGER PRIMARY KEY AUTOINCREMENT, NombreEmpleado varchar(50), ApellidoEmpleado varchar(50), Telefono integer, Correo varchar(50), TenisLavados integer)")):
-            if(q.exec()):
-                print("Tabla empleado creada")
-    # #Agregar datos de prueba de clientesCW.csv
-    # with open('csv/clientesCW.csv', errors="ignore") as File:
-    #     reader = csv.reader(File)
-    #     for row in reader:
-    #         con = sql.connect("cleanwalkers.db")
-    #         cursor = con.cursor()
-    #         if cursor.fetchone() == None:
-    #             instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimiento, TotalVisitas, TotalServicios, FechaRegistro) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}')")
-    #             con.execute(instruccion)
-    #             con.commit()
-    #             con.close()
-    # # #Agregar datos de calzadoF.csv
-    # with open ('csv/calzadoF.csv', errors="ignore") as File:
-    #     reader = csv.reader(File)
-    #     for row in reader:
-    #         con = sql.connect("cleanwalkers.db")
-    #         cursor = con.cursor()
-    #         if cursor.fetchone() == None:
-    #             instruccion = (f"INSERT INTO calzado (TipoCalzado, ServicioContratado, Marca, Talla, Color, Materiales, DetallesCalzado, FechaLlegada, Rack, Extra, Cliente) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}', '{row[9]}', '{row[10]}')")
-    #             con.execute(instruccion)
-    #             con.commit()
-    #             con.close()
-    # # #Agregar datos de empleado.csv
-    # with open ('csv/empleado.csv', errors="ignore") as File:
-    #     reader = csv.reader(File)
-    #     for row in reader:
-    #         con = sql.connect("cleanwalkers.db")
-    #         cursor = con.cursor()
-    #         if cursor.fetchone() == None:
-    #             instruccion = (f"INSERT INTO empleado (NombreEmpleado, ApellidoEmpleado, Telefono, Correo, TenisLavados) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}')")
-    #             con.execute(instruccion)
-    #             con.commit()
-    #             con.close()
+# def prepareDatabase():
+#     db = QSqlDatabase.addDatabase("QSQLITE")
+#     db.setDatabaseName("cleanwalkers.db")
+#     if(db.open()):
+#         q = QSqlQuery()
+#         #crear tabla calzado
+#         if(q.prepare("CREATE TABLE IF NOT EXISTS calzado (idTenis INTEGER PRIMARY KEY AUTOINCREMENT, TipoCalzado varchar(50), ServicioContratado varchar(50), Marca varchar(50), Talla float, Color varchar(50), Materiales varchar(50), DetallesCalzado varchar(50), FechaLlegada date, Rack integer, Extra varchar(50), Cliente varchar(50))")):
+#             if(q.exec()):
+#                 print("Tabla calzado creada")
+#         if(q.prepare("CREATE TABLE IF NOT EXISTS servicio (NombreServicio varchar(50) PRIMARY KEY not null, Costo float, PromedioEntrega varchar(50))")):
+#             if(q.exec()):
+#                 print("Tabla servicio creada")
+#         if(q.prepare("CREATE TABLE IF NOT EXISTS cliente (idCliente INTEGER PRIMARY KEY AUTOINCREMENT, NombreCliente varchar(50), ApellidoCliente varchar(50), Correo varchar(50), Telefono integer, Sexo varchar(50), FechaNacimiento date, TotalVisitas integer, TotalServicios integer, FechaRegistro date)")):
+#             if(q.exec()):
+#                 print("Tabla cliente creada")
+#         if(q.prepare("CREATE TABLE IF NOT EXISTS orden (idOrden INTEGER PRIMARY KEY AUTOINCREMENT, idCliente varchar(50), idTenis integer, FechaLlegada date, Costo float, FOREIGN KEY (idCliente) REFERENCES cliente(idCliente), FOREIGN KEY (idTenis) REFERENCES calzado(idTenis))")):
+#             if(q.exec()):
+#                 print("Tabla orden creada")
+#         if(q.prepare("CREATE TABLE IF NOT EXISTS empleado (idEmpleado INTEGER PRIMARY KEY AUTOINCREMENT, NombreEmpleado varchar(50), ApellidoEmpleado varchar(50), Telefono integer, Correo varchar(50), TenisLavados integer)")):
+#             if(q.exec()):
+#                 print("Tabla empleado creada")
+    
+#     #Agregar datos de prueba de clientesCW.csv
+#     with open('csv/clientesCW.csv', errors="ignore") as File:
+#         reader = csv.reader(File)
+#         for row in reader:
+#             con = sql.connect("cleanwalkers.db")
+#             cursor = con.cursor()
+#             if cursor.fetchone() == None:
+#                 instruccion = (f"INSERT INTO cliente (NombreCliente, ApellidoCliente, Correo, Telefono, Sexo, FechaNacimiento, TotalVisitas, TotalServicios, FechaRegistro) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}')")
+#                 con.execute(instruccion)
+#                 con.commit()
+#                 con.close()
+#     # #Agregar datos de calzadoF.csv
+#     with open ('csv/calzadoF.csv', errors="ignore") as File:
+#         reader = csv.reader(File)
+#         for row in reader:
+#             con = sql.connect("cleanwalkers.db")
+#             cursor = con.cursor()
+#             if cursor.fetchone() == None:
+#                 instruccion = (f"INSERT INTO calzado (TipoCalzado, ServicioContratado, Marca, Talla, Color, Materiales, DetallesCalzado, FechaLlegada, Rack, Extra, Cliente) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}', '{row[6]}', '{row[7]}', '{row[8]}', '{row[9]}', '{row[10]}')")
+#                 con.execute(instruccion)
+#                 con.commit()
+#                 con.close()
+#     # #Agregar datos de empleado.csv
+#     with open ('csv/empleado.csv', errors="ignore") as File:
+#         reader = csv.reader(File)
+#         for row in reader:
+#             con = sql.connect("cleanwalkers.db")
+#             cursor = con.cursor()
+#             if cursor.fetchone() == None:
+#                 instruccion = (f"INSERT INTO empleado (NombreEmpleado, ApellidoEmpleado, Telefono, Correo, TenisLavados) VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}')")
+#                 con.execute(instruccion)
+#                 con.commit()
+#                 con.close()
 
 def verificarServicios():
     con = sql.connect("cleanwalkers.db")
