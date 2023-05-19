@@ -65,7 +65,7 @@
 border-radius:10px;</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab_6">
      <attribute name="title">
@@ -181,7 +181,7 @@ border-radius:10px;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_9">
+     <widget class="QGraphicsView" name="clientes_graphicsView_4">
       <property name="geometry">
        <rect>
         <x>570</x>
@@ -190,45 +190,13 @@ border-radius:10px;</string>
         <height>641</height>
        </rect>
       </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 236, 0)</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QGraphicsView" name="clientes_graphicsView_4">
-      <property name="geometry">
-       <rect>
-        <x>580</x>
-        <y>30</y>
-        <width>341</width>
-        <height>621</height>
-       </rect>
-      </property>
      </widget>
      <widget class="QLabel" name="label_12">
       <property name="geometry">
        <rect>
         <x>945</x>
         <y>390</y>
-        <width>261</width>
-        <height>271</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 236, 0)</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_13">
-      <property name="geometry">
-       <rect>
-        <x>1220</x>
-        <y>390</y>
-        <width>261</width>
+        <width>541</width>
         <height>271</height>
        </rect>
       </property>
@@ -264,17 +232,7 @@ border-radius: 15px;</string>
        <rect>
         <x>950</x>
         <y>400</y>
-        <width>250</width>
-        <height>250</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QGraphicsView" name="clientes_graphicsView_6">
-      <property name="geometry">
-       <rect>
-        <x>1225</x>
-        <y>400</y>
-        <width>250</width>
+        <width>531</width>
         <height>250</height>
        </rect>
       </property>
@@ -342,13 +300,10 @@ font: 18pt &quot;MS Outlook&quot;;</string>
      <zorder>clientes_graphicsView_1</zorder>
      <zorder>label_7</zorder>
      <zorder>clientes_graphicsView_3</zorder>
-     <zorder>label_9</zorder>
      <zorder>clientes_graphicsView_4</zorder>
      <zorder>label_12</zorder>
-     <zorder>label_13</zorder>
      <zorder>label</zorder>
      <zorder>clientes_graphicsView_5</zorder>
-     <zorder>clientes_graphicsView_6</zorder>
      <zorder>label_11</zorder>
      <zorder>clientes_graphicsView_7</zorder>
      <zorder>regresarButton</zorder>
@@ -396,22 +351,6 @@ font: 18pt &quot;MS Outlook&quot;;</string>
         <y>390</y>
         <width>261</width>
         <height>271</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 236, 0)</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_102">
-      <property name="geometry">
-       <rect>
-        <x>570</x>
-        <y>20</y>
-        <width>361</width>
-        <height>641</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -544,10 +483,10 @@ border-radius: 15px;</string>
      <widget class="QGraphicsView" name="calzado_graphicsView_5">
       <property name="geometry">
        <rect>
-        <x>580</x>
-        <y>30</y>
-        <width>341</width>
-        <height>621</height>
+        <x>570</x>
+        <y>20</y>
+        <width>361</width>
+        <height>641</height>
        </rect>
       </property>
      </widget>
@@ -725,22 +664,6 @@ font: 18pt &quot;MS Outlook&quot;;</string>
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="label_117">
-      <property name="geometry">
-       <rect>
-        <x>570</x>
-        <y>20</y>
-        <width>361</width>
-        <height>641</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 236, 0)</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
      <widget class="QPushButton" name="regresarButton_8">
       <property name="geometry">
        <rect>
@@ -863,10 +786,10 @@ border-radius: 15px;</string>
      <widget class="QGraphicsView" name="empleados_graphicsView_5">
       <property name="geometry">
        <rect>
-        <x>580</x>
-        <y>30</y>
-        <width>341</width>
-        <height>621</height>
+        <x>570</x>
+        <y>20</y>
+        <width>361</width>
+        <height>641</height>
        </rect>
       </property>
      </widget>

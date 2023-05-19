@@ -18,10 +18,9 @@ empleados_graphicsView_1
 idea: promedio de servicios por mes
 
 empleados_graphicsView_3
-idea: Grafica de columnas Seleccionar ServicioContratado de calzado lo contamos y lo multiplicamos por el costo de la tabla servicio
 
 empleados_graphicsView_5
-empleados_graphicsView_6
+
 Arreglar fechas, dividiendo por mes
 
 

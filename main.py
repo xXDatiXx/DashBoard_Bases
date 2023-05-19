@@ -324,7 +324,7 @@ class DashboardScreen(QMainWindow):
         plt.savefig("graficas/clientes1.png")
         #resize image with PIL
         img = Image.open("graficas/clientes1.png")
-        img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
+        img = img.resize((resizePequeño,resizePequeño), Image.LANCZOS)
         img.save("graficas/clientes1.png")
         self.clientes_graphicsView_1.setStyleSheet("background-image: url(graficas/clientes1.png);")
         #limpiar variables
@@ -333,31 +333,7 @@ class DashboardScreen(QMainWindow):
         #------------------------
         #clientes_graphicsView_2
         #------------------------
-        #Grafica histplot sobre la edad de los clientes
-        cursor.execute("SELECT FechaNacimiento FROM cliente")
-        result = cursor.fetchall()
-        df = pd.DataFrame(result)
-        df.columns = ["FechaNacimiento"]
-        #Formato de fecha en db es dd/mm/yyyy
-        #Se convierte a yyyy
-        df["FechaNacimiento"] = df["FechaNacimiento"].str.slice(start=6)
-        df["FechaNacimiento"] = df["FechaNacimiento"].astype(int)
-        df["FechaNacimiento"] = 2023 - df["FechaNacimiento"]
-        #Verificar que no haya edades menores a 10 ni mayores a 100 años y si hay ponerlos entre 10 y 50
-        for i in range(len(df["FechaNacimiento"])):
-            if df["FechaNacimiento"][i] < 10 or df["FechaNacimiento"][i] > 100:
-                df["FechaNacimiento"][i] = random.randint(10,50)
-        plt.figure (figsize=(4,4))
-        plt.title("Número de clientes por edad")
-        plt.ylabel("Total")
-        plt.xlabel("Edad")
-        plt.hist(df["FechaNacimiento"], bins=10, color="#F2C94C")
-        plt.savefig("graficas/clientes2.png")
-        img = Image.open("graficas/clientes2.png")
-        img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
-        img.save("graficas/clientes2.png")
-        self.clientes_graphicsView_2.setStyleSheet("background-image: url(graficas/clientes2.png);")
-        plt.close()
+       
 
         #------------------------
         #clientes_graphicsView_3
@@ -374,67 +350,72 @@ class DashboardScreen(QMainWindow):
         plt.savefig("graficas/clientes3.png")
         #resize image with PIL
         img = Image.open("graficas/clientes3.png")
-        img = img.resize((511,351), Image.ANTIALIAS)
+        img = img.resize((511,351), Image.LANCZOS)
         img.save("graficas/clientes3.png")
         self.clientes_graphicsView_3.setStyleSheet("background-image: url(graficas/clientes3.png);")
         #limpiar variables
         plt.close()
 
         #------------------------
-        #clientes_graphicsView_4
+        #clientes_graphicsView_5
         #------------------------
         #Gráfica de barras Horizontal
         #De los clientes que tengan mas TotalServicios, mostrar los 10 primeros con nombre
         cursor.execute("SELECT NombreCliente, ApellidoCLiente, TotalServicios FROM cliente ORDER BY TotalServicios DESC LIMIT 10")
         result = cursor.fetchall()
-        df = pd.DataFrame(result) 
-        df.columns = ["Nombre", "Apellido", "TotalServicios"] 
-        plt.figure (figsize=(4,8))
-        df["Nombre"] = df["Nombre"] + " " + df["Apellido"]
-        df = df.drop(["Apellido"], axis=1) #eliminar columna Apellido 
-        #inclinar los nombres
-        plt.yticks(rotation=45)
+        df = pd.DataFrame(result)
+        df.columns = ["Nombre", "Apellido", "TotalServicios"]
+        plt.figure (figsize=(5,5))
+        plt.xticks(rotation=-45)
         plt.title("Clientes con mas servicios")
-        sns.barplot(x="TotalServicios", y="Nombre", data=df, palette="cividis")
-        plt.savefig("graficas/clientes4.png")
-        img = Image.open("graficas/clientes4.png")
-        img = img.resize((341,621), Image.ANTIALIAS)
-        img.save("graficas/clientes4.png")
-        self.clientes_graphicsView_4.setStyleSheet("background-image: url(graficas/clientes4.png);")
+        sns.barplot(x="Nombre", y="TotalServicios", data=df, palette="cividis")
+        plt.savefig("graficas/clientes5.png")
+        img = Image.open("graficas/clientes5.png")
+        img = img.crop((0, 30, 500, 500))
+        img = img.resize((531,250), Image.LANCZOS)
+        img.save("graficas/clientes5.png")
+        self.clientes_graphicsView_5.setStyleSheet("background-image: url(graficas/clientes5.png);")
+        #limpiar variables
         plt.close()
+
+
+
+        self.clientes_graphicsView_4.setStyleSheet("background-image: url(graficas/MJ_Cuadro.jpg);")
 
         #------------------------
         #clientes_graphicsView_5
         #------------------------
         #Grafica de barras, clientes por mes de registro
-        self.clientes_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
-        
-
-
-        #------------------------
-        #clientes_graphicsView_6
-        #------------------------
-        # cursor.execute("SELECT STRFTIME('%m', datetime(FechaRegistro, 'unixepoch')) as Mes, COUNT(*) as total FROM cliente GROUP BY STRFTIME('%m', datetime(FechaRegistro, 'unixepoch'))")
-        # result = cursor.fetchall()
-        # df = pd.DataFrame(result)
-        # df.columns = ["Mes", "Total"]
-        # plt.figure (figsize=(4,4))
-        # plt.title("Clientes registrados por mes")
-        # plt.xticks(rotation = 45)
-        # sns.barplot(x="Mes", y="Total", data=df, palette="cividis")
-        # #download image
-        # plt.savefig("graficas/clientes7.png")
-        # #resize image with PIL
-        # img = Image.open("graficas/clientes6.png")
-        # img = img.resize((461,331), Image.ANTIALIAS)
-        # img.save("graficas/clientes7.png")
-        # self.clientes_graphicsView_7.setStyleSheet("background-image: url(graficas/clientes7.png);")
-        # plt.close()
+        #self.clientes_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
         
         #------------------------
         #clientes_graphicsView_7
         #------------------------
-        #Gráfica de barras
+         #Grafica histplot sobre la edad de los clientes
+        cursor.execute("SELECT FechaNacimiento FROM cliente")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["FechaNacimiento"]
+        #Formato de fecha en db es dd/mm/yyyy
+        #Se convierte a yyyy
+        df["FechaNacimiento"] = df["FechaNacimiento"].str.slice(start=6)
+        df["FechaNacimiento"] = df["FechaNacimiento"].astype(int)
+        df["FechaNacimiento"] = 2023 - df["FechaNacimiento"]
+        #Verificar que no haya edades menores a 10 ni mayores a 100 años y si hay ponerlos entre 10 y 50
+        for i in range(len(df["FechaNacimiento"])):
+            if df["FechaNacimiento"][i] < 10 or df["FechaNacimiento"][i] > 100:
+                df["FechaNacimiento"][i] = random.randint(10,50)
+        plt.figure (figsize=(5,4))
+        plt.title("Número de clientes por edad")
+        plt.ylabel("Total")
+        plt.xlabel("Edad")
+        plt.hist(df["FechaNacimiento"], bins=10, color="#F2C94C")
+        plt.savefig("graficas/clientes7.png")
+        img = Image.open("graficas/clientes7.png")
+        img = img.resize((461,331), Image.LANCZOS)
+        img.save("graficas/clientes7.png")
+        self.clientes_graphicsView_7.setStyleSheet("background-image: url(graficas/clientes7.png);")
+        plt.close()
         
 
         #------------------------
@@ -447,11 +428,19 @@ class DashboardScreen(QMainWindow):
         df.columns = ["TipoCalzado", "Total"]
         plt.figure (figsize=(4,4))
         plt.title("Tipos de Calzado")
-        plt.pie(df["Total"], labels=df["TipoCalzado"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#BAA050", "#0a17ad", "#FABC00", "#0a17ad", "#FABC00"])
+        explode = (0.05, 0.05, 0.05, 0.05, 0.05)
+        plt.pie(df["Total"], labels=df["TipoCalzado"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#BAA050", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00"], pctdistance=0.85, explode=explode)
+
+        #----------------------------------------------
+        centre_circle = plt.Circle((0, 0), 0.60, fc='white')
+        fig = plt.gcf()
+        fig.gca().add_artist(centre_circle)
+        #-----------------------------------------------
+
         plt.axis("equal")
         plt.savefig("graficas/calzado1.png")
         img = Image.open("graficas/calzado1.png")
-        img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
+        img = img.resize((resizePequeño,resizePequeño), Image.LANCZOS)
         img.save("graficas/calzado1.png")
         self.calzado_graphicsView_1.setStyleSheet("background-image: url(graficas/calzado1.png);")
         plt.close()
@@ -466,11 +455,11 @@ class DashboardScreen(QMainWindow):
         df.columns = ["Materiales", "Total"]
         plt.figure (figsize=(4,4))
         plt.title("Materiales del Calzado")
-        plt.pie(df["Total"], labels=df["Materiales"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#FABC00", "#0a17ad", "#FABC00", "#0a17ad", "#FABC00", "#0a17ad", "#BAA050"])
+        plt.pie(df["Total"], labels=df["Materiales"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#BAA050"])
         plt.axis("equal")
         plt.savefig("graficas/calzado3.png")
         img = Image.open("graficas/calzado3.png")
-        img = img.resize((resizePequeño,resizePequeño), Image.ANTIALIAS)
+        img = img.resize((resizePequeño,resizePequeño), Image.LANCZOS)
         img.save("graficas/calzado3.png")
         self.calzado_graphicsView_3.setStyleSheet("background-image: url(graficas/calzado3.png);")
         plt.close()
@@ -488,16 +477,36 @@ class DashboardScreen(QMainWindow):
         sns.barplot(x="Total", y="Marca", data=df, palette="cividis")
         plt.savefig("graficas/calzado4.png")
         img = Image.open("graficas/calzado4.png")
-        img = img.resize((resizeGrande1,resizeGrande2), Image.ANTIALIAS)
+        img = img.crop((0, 30, 590, 480))
+        img = img.resize((resizeGrande1,resizeGrande2), Image.LANCZOS)
         img.save("graficas/calzado4.png")
         self.calzado_graphicsView_4.setStyleSheet("background-image: url(graficas/calzado4.png);")
+        plt.close()
+
+        #------------------------
+        #calzado_graphicsView_5
+        #------------------------
+        cursor.execute("SELECT A.Materiales, (COUNT(A.Materiales)*B.Costo) AS Ganancia FROM calzado A, servicio B WHERE A.ServicioContratado = B.NombreServicio GROUP BY A.Materiales")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["Materiales", "Total"]
+        plt.figure (figsize=(7,5))
+        plt.title("Ganancias por tipo de Material")
+        plt.bar(df["Materiales"], df["Total"], color=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB"])
+        plt.savefig("graficas/calzado5.png")
+        img = Image.open("graficas/calzado5.png")
+        #recortar imagen parte de arriba
+        img = img.crop((0, 00, 650, 500))
+        img = img.resize((341,621), Image.LANCZOS)
+        img.save("graficas/calzado5.png")
+        self.calzado_graphicsView_5.setStyleSheet("background-image: url(graficas/calzado5.png);")
         plt.close()
 
 
         #------------------------
         #calzado_graphicsView_6
         #------------------------
-        # grafica de barras, con la marca de calzado y el total de calzado de esa marca
+        # grafica , con la marca de calzado y el total de calzado de esa marca
         cursor.execute("SELECT Talla, COUNT(*) FROM calzado GROUP BY Talla")
         result = cursor.fetchall()
         df = pd.DataFrame(result) 
@@ -506,10 +515,10 @@ class DashboardScreen(QMainWindow):
         plt.yticks(rotation=0)
         plt.xticks(rotation = 45)
         plt.title("Tallas usuales")
-        sns.barplot(x="Total", y="Talla", data=df, palette="cividis")
+        plt.stem(df["Total"], df["Talla"], use_line_collection=True)
         plt.savefig("graficas/calzado6.png")
         img = Image.open("graficas/calzado6.png")
-        img = img.resize((resizeGrande3,resizeGrande4), Image.ANTIALIAS)
+        img = img.resize((resizeGrande3,resizeGrande4), Image.LANCZOS)
         img.save("graficas/calzado6.png")
         self.calzado_graphicsView_6.setStyleSheet("background-image: url(graficas/calzado6.png);")
         plt.close()
@@ -523,12 +532,16 @@ class DashboardScreen(QMainWindow):
         df = pd.DataFrame(result)
         df.columns = ["ServicioContratado", "Total"]
         plt.figure (figsize=(4,4))
-        plt.title("Servicios contratados")
-        plt.pie(df["Total"], labels=df["ServicioContratado"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#FABC00", "#0a17ad", "#FABC00", "#0a17ad", "#FABC00", "#0a17ad"])
+        plt.title("Servicios contratados") 
+        explode = (0.05, 0.05, 0.05, 0.05, 0.05, 0.05)
+        plt.pie(df["Total"], labels=df["ServicioContratado"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB"], pctdistance=0.85, explode=explode)
+        centre_circle = plt.Circle((0, 0), 0.60, fc='white')
+        fig = plt.gcf()
+        fig.gca().add_artist(centre_circle)
         plt.axis("equal")
         plt.savefig("graficas/calzado7.png")
         img = Image.open("graficas/calzado7.png")
-        img = img.resize((resizePequeño2,resizePequeño2), Image.ANTIALIAS)
+        img = img.resize((resizePequeño2,resizePequeño2), Image.LANCZOS)
         img.save("graficas/calzado7.png")
         self.calzado_graphicsView_7.setStyleSheet("background-image: url(graficas/calzado7.png);")
         plt.close()
@@ -538,25 +551,42 @@ class DashboardScreen(QMainWindow):
         #------------------------
         #grafica de tendencia de FechaLlegada del calzado
 
-        self.calzado_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        
+        
+        img = Image.open("graficas/logo.jpg")
+        img = img.crop((50, 50, 480, 720))
+        img.save("graficas/logo1.jpg")
+        self.calzado_graphicsView_5.setStyleSheet("background-image: url(graficas/logo1.jpg);")
+
+
         self.calzado_graphicsView_8.setStyleSheet("background-image: url(graficas/logo.jpg);")
 
         #------------------------
         #empleados_graphicsView_1
         #------------------------
-        
+
 
         #------------------------
         #empleados_graphicsView_3
         #------------------------
-        #Grafica de columnas Seleccionar ServicioContratado de calzado lo contamos y lo multiplicamos por el costo de la tabla servicio
-        # cursor.execute("SELECT NombreServicio, Costo, 00.St_ FROM servicio, (SELECT ServicioContratado, COUNT(*) FROM calzado GROUP BY ServicioContratado END AS St_)00 ")
-        # result = cursor.fetchall()
-        # df = pd.DataFrame(result)
-        # print(df)
-        
-
-        self.empleados_graphicsView_3.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        #Grafica pastel Seleccionar ServicioContratado de calzado lo contamos y lo multiplicamos por el costo de la tabla servicio
+        cursor.execute("SELECT A.ServicioContratado, (COUNT(A.ServicioContratado)*B.Costo) AS Ganancia FROM calzado A, servicio B WHERE A.ServicioContratado = B.NombreServicio GROUP BY ServicioContratado")
+        result = cursor.fetchall()
+        df = pd.DataFrame(result)
+        df.columns = ["ServicioContratado", "Total"]
+        plt.figure (figsize=(4,4))
+        plt.title("Porcentaje de ganancias por servicio")
+        plt.pie(df["Total"], labels=df["ServicioContratado"], autopct="%1.1f%%", shadow=False, startangle=90, colors=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB"])
+        centre_circle = plt.Circle((0, 0), 0.60, fc='white')
+        fig = plt.gcf()
+        fig.gca().add_artist(centre_circle)
+        plt.axis("equal")
+        plt.savefig("graficas/empleados3.png")
+        img = Image.open("graficas/empleados3.png")
+        img = img.resize((resizePequeño2,resizePequeño2), Image.LANCZOS)
+        img.save("graficas/empleados3.png")
+        self.empleados_graphicsView_3.setStyleSheet("background-image: url(graficas/empleados3.png);")
+        plt.close()
 
         #------------------------
         #empleados_graphicsView_4
@@ -572,30 +602,37 @@ class DashboardScreen(QMainWindow):
         sns.barplot(x="Nombre", y="Total", data=df, palette="cividis")
         plt.savefig("graficas/empleados4.png")  
         img = Image.open("graficas/empleados4.png")
-        img = img.resize((resizeGrande1,resizeGrande2), Image.ANTIALIAS)
+        img = img.crop((0, 25, 400, 400))
+        img = img.resize((resizeGrande1,resizeGrande2), Image.LANCZOS)
         img.save("graficas/empleados4.png")
         self.empleados_graphicsView_4.setStyleSheet("background-image: url(graficas/empleados4.png);")
 
-        self.empleados_graphicsView_5.setStyleSheet("background-image: url(graficas/logo.jpg);")
+        img = Image.open("graficas/logoTenis.png")
+        img = img.resize((900,641), Image.LANCZOS)
+        img = img.crop((275, 0, 720, 641))
+        img.save("graficas/logoTenis1.png")
+        self.empleados_graphicsView_5.setStyleSheet("background-image: url(graficas/logoTenis1.png);")
 
         #------------------------
         #empleados_graphicsView_6
         #------------------------
-        #Grafica lineplot de FechaLlegada de calzado por meses
-        cursor.execute("SELECT FechaLlegada, COUNT(*) FROM calzado GROUP BY FechaLlegada")
+        #Grafica pastel Seleccionar ServicioContratado de calzado lo contamos y lo multiplicamos por el costo de la tabla servicio
+        cursor.execute("SELECT A.ServicioContratado, (COUNT(A.ServicioContratado)*B.Costo) AS Ganancia FROM calzado A, servicio B WHERE A.ServicioContratado = B.NombreServicio GROUP BY ServicioContratado")
         result = cursor.fetchall()
         df = pd.DataFrame(result)
-        df.columns = ["FechaLlegada", "Total"]
-        plt.figure (figsize=(4,4))
-        plt.title("Fecha de llegada de calzado")
-        plt.xticks(rotation = 45)
-        sns.lineplot(x="FechaLlegada", y="Total", data=df, palette="cividis")
+        df.columns = ["ServicioContratado", "Total"]
+        plt.figure (figsize=(8,7))
+        plt.title("Porcentaje de ganancias por servicio")
+        plt.bar(df["ServicioContratado"], df["Total"], color=["#FABC00", "#87CEEB", "#FABC00", "#87CEEB", "#FABC00", "#87CEEB"])
         plt.savefig("graficas/empleados6.png")
         img = Image.open("graficas/empleados6.png")
-        img = img.resize((461,301), Image.ANTIALIAS)
+        #recortar imagen parte de arriba
+        img = img.crop((0, 55, 800, 700))
+        img = img.resize((resizeGrande3,resizeGrande4), Image.LANCZOS)
         img.save("graficas/empleados6.png")
         self.empleados_graphicsView_6.setStyleSheet("background-image: url(graficas/empleados6.png);")
         plt.close()
+
 
         self.empleados_graphicsView_7.setStyleSheet("background-image: url(graficas/logo.jpg);")
         self.empleados_graphicsView_8.setStyleSheet("background-image: url(graficas/logo.jpg);")
@@ -661,7 +698,7 @@ def prepareDatabase():
     #             con.execute(instruccion)
     #             con.commit()
     #             con.close()
-  
+
 def verificarServicios():
     con = sql.connect("cleanwalkers.db")
     cursor = con.cursor()
@@ -683,8 +720,8 @@ def verificarServicios():
         con.close()
 
 #Main
-prepareDatabase()
-verificarServicios()
+# prepareDatabase()
+# verificarServicios()
 app = QApplication(sys.argv)
 welcome = DashboardScreen() #WelcomeScreen CAMBIAR
 widget = QtWidgets.QStackedWidget()
